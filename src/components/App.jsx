@@ -5,6 +5,9 @@ import {
   Route,
   Link,
 } from 'react-router-dom';
+import HomePage from './HomePage.jsx';
+import LoginPage from './LoginPage.jsx';
+import PageNotFound from './PageNotFound.jsx';
 
 export default function App() {
   return (
@@ -18,28 +21,23 @@ export default function App() {
             <li>
               <Link to="/login">Login</Link>
             </li>
+            <li>
+              <Link to="/404">404</Link>
+            </li>
           </ul>
         </nav>
-
-        {/* A <Switch> looks through its children <Route>s and
-            renders the first one that matches the current URL. */}
         <Switch>
-          <Route path="/login">
-            <Login />
+          <Route exact path="/">
+            <HomePage />
           </Route>
-          <Route path="/">
-            <Home />
+          <Route path="/login">
+            <LoginPage />
+          </Route>
+          <Route>
+            <PageNotFound />
           </Route>
         </Switch>
       </div>
     </Router>
   );
-}
-
-function Home() {
-  return <h2>Home</h2>;
-}
-
-function Login() {
-  return <h2>Login</h2>;
 }
