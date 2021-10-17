@@ -9,8 +9,11 @@ import HomePage from './HomePage.jsx';
 import LoginPage from './LoginPage.jsx';
 import PageNotFound from './PageNotFound.jsx';
 
-export default function App() {
-  return (
+export default () => (
+  <div className="d-flex flex-column h-100">
+    <nav className="mb-3 navbar navbar-expand-lg navbar-light bg-light">
+      <a className="mr-auto navbar-brand" href="/">Hexlet Chat</a>
+    </nav>
     <Router>
       <div>
         <nav>
@@ -20,9 +23,6 @@ export default function App() {
             </li>
             <li>
               <Link to="/login">Login</Link>
-            </li>
-            <li>
-              <Link to="/404">404</Link>
             </li>
           </ul>
         </nav>
@@ -39,5 +39,5 @@ export default function App() {
         </Switch>
       </div>
     </Router>
-  );
-}
+  </div>
+);

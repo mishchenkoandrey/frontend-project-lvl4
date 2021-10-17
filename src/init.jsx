@@ -4,6 +4,6 @@ import App from './components/App.jsx';
 export default () => {
   ReactDOM.render(
     App(),
-    document.querySelector('body'),
+    document.querySelector('#chat'),
   );
 };
