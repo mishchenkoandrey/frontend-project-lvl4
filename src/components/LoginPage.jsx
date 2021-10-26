@@ -6,7 +6,7 @@ import { useFormik } from 'formik';
 import { Button, Form } from 'react-bootstrap';
 import { useLocation, useHistory } from 'react-router-dom';
 import useAuth from '../hooks/useAuth.js';
-import routes from '../common/routes.js';
+import routes from '../routes.js';
 import validationSchemas from '../validation.js';
 
 const LoginPage = () => {
