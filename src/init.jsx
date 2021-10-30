@@ -1,9 +1,10 @@
-import ReactDOM from 'react-dom';
-import App from './components/App.jsx';
+import React from 'react';
 
-export default () => {
-  ReactDOM.render(
-    App(),
-    document.querySelector('#chat'),
-  );
-};
+import App from './components/App.jsx';
+import ProvideAuth from './components/ProvideAuth.jsx';
+
+export default async () => (
+  <ProvideAuth>
+    <App />
+  </ProvideAuth>
+);

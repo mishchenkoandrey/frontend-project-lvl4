@@ -4,16 +4,16 @@ import axios from 'axios';
 import React, { useEffect, useRef, useState } from 'react';
 import { useFormik } from 'formik';
 import { Button, Form } from 'react-bootstrap';
-import { useLocation, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import useAuth from '../hooks/useAuth.js';
 import routes from '../routes.js';
 import validationSchemas from '../validation.js';
 
 const LoginPage = () => {
   const auth = useAuth();
-  const [authFailed, setAuthFailed] = useState(false);
+  console.log('LoginPage:', auth);
+  const [isAuthFailed, setIsAuthFailed] = useState(false);
   const inputRef = useRef();
-  const location = useLocation();
   const history = useHistory();
   useEffect(() => {
     inputRef.current.focus();
@@ -25,22 +25,18 @@ const LoginPage = () => {
       password: '',
     },
     validationSchema: validationSchemas.LoginFormSchema,
-    onSubmit: async (values) => {
-      setAuthFailed(false);
-
+    onSubmit: async (loginData) => {
       try {
-        const res = await axios.post(routes.loginPath(), values);
-        localStorage.setItem('userId', JSON.stringify(res.data));
-        auth.logIn();
-        const { from } = location.state || { from: { pathname: '/' } };
-        history.replace(from);
-      } catch (err) {
-        if (err.isAxiosError && err.response.status === 401) {
-          setAuthFailed(true);
-          inputRef.current.select();
-          return;
+        const response = await axios.post(routes.loginPath(), loginData);
+        const { token, username } = response.data;
+        auth.logIn(token, username);
+        history.replace('/');
+      } catch (error) {
+        if (!error.isAxiosError || error.response.status !== 401) {
+          throw new Error(error);
         }
-        throw err;
+        setIsAuthFailed(true);
+        inputRef.current.select();
       }
     },
   });
@@ -62,7 +58,8 @@ const LoginPage = () => {
                     name="username"
                     id="username"
                     autoComplete="username"
-                    isInvalid={authFailed || (formik.touched.username && !!formik.errors.username)}
+                    isInvalid={isAuthFailed
+                      || (formik.touched.username && !!formik.errors.username)}
                     required
                     ref={inputRef}
                     className="form-control"
@@ -82,7 +79,8 @@ const LoginPage = () => {
                     name="password"
                     id="password"
                     autoComplete="current-password"
-                    isInvalid={authFailed || (formik.touched.password && !!formik.errors.password)}
+                    isInvalid={isAuthFailed
+                      || (formik.touched.password && !!formik.errors.password)}
                     required
                     className="form-control"
                   />
