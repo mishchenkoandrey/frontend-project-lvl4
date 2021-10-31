@@ -63,6 +63,7 @@ const LoginPage = () => {
                     required
                     ref={inputRef}
                     className="form-control"
+                    disabled={formik.isSubmitting}
                   />
                   <Form.Label htmlFor="username">Ваш ник</Form.Label>
                   {formik.touched.username && formik.errors.username ? (
@@ -83,6 +84,7 @@ const LoginPage = () => {
                       || (formik.touched.password && !!formik.errors.password)}
                     required
                     className="form-control"
+                    disabled={formik.isSubmitting}
                   />
                   <Form.Label htmlFor="password">Password</Form.Label>
                   {formik.touched.password && formik.errors.password ? (
@@ -90,7 +92,7 @@ const LoginPage = () => {
                   ) : null}
                   <Form.Control.Feedback type="invalid">the username or password is incorrect</Form.Control.Feedback>
                 </Form.Group>
-                <Button type="submit" variant="outline-primary">Submit</Button>
+                <Button type="submit" variant="outline-primary" disabled={formik.isSubmitting}>Submit</Button>
               </Form>
             </div>
           </div>
