@@ -30,7 +30,6 @@ const HomePage = () => {
       if (!error.isAxiosError || error.response.status !== 401) {
         throw new Error(error);
       }
-      history.replace('/login');
     }
   };
 

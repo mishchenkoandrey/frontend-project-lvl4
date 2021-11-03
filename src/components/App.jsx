@@ -3,29 +3,39 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
+  Redirect,
 } from 'react-router-dom';
 import HomePage from './HomePage.jsx';
 import LoginPage from './LoginPage.jsx';
 import PageNotFound from './PageNotFound.jsx';
 import Header from './Header.jsx';
+import useAuth from '../hooks/useAuth.js';
 
-export default () => (
-  <div className="d-flex flex-column h-100">
-    <Router>
-      <Switch>
-        <Route exact path="/">
-          <Header />
-          <HomePage />
-        </Route>
-        <Route path="/login">
-          <Header />
-          <LoginPage />
-        </Route>
-        <Route>
-          <Header />
-          <PageNotFound />
-        </Route>
-      </Switch>
-    </Router>
-  </div>
-);
+export default () => {
+  const auth = useAuth();
+  return (
+    <div className="d-flex flex-column h-100">
+      <Header />
+      <Router>
+        <Switch>
+          <Route
+            exact
+            path="/"
+            render={({ location }) => (auth.isLoggedIn()
+              ? (
+                <HomePage />
+              ) : (
+                <Redirect to={{ pathname: '/login', state: { from: location } }} />
+              ))}
+          />
+          <Route path="/login">
+            <LoginPage />
+          </Route>
+          <Route>
+            <PageNotFound />
+          </Route>
+        </Switch>
+      </Router>
+    </div>
+  );
+};
