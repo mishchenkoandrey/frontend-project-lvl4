@@ -2,8 +2,7 @@
 
 import axios from 'axios';
 import React, { useEffect } from 'react';
-import { Container, Row, Col, Button } from 'react-bootstrap';
-import { useHistory } from 'react-router-dom';
+import { Container, Row, Col } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 
 import routes from '../routes.js';
@@ -15,7 +14,6 @@ import { initChannels } from '../slices/channelsSlice.js';
 const HomePage = () => {
   const dispatch = useDispatch();
   const auth = useAuth();
-  const history = useHistory();
   const fetchData = async () => {
     const token = auth.getToken();
     try {
@@ -42,6 +40,11 @@ const HomePage = () => {
       <Row className="h-100 bg-white">
         <Col xs={4} md={2} className="border-end pt-5 px-0 bg-light">
           <Channels />
+        </Col>
+        <Col className="p-0 h-100">
+          <div className="d-flex flex-column h-100">
+            <Messages />
+          </div>
         </Col>
       </Row>
     </Container>
