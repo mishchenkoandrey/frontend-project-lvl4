@@ -7,23 +7,22 @@ import {
 import HomePage from './HomePage.jsx';
 import LoginPage from './LoginPage.jsx';
 import PageNotFound from './PageNotFound.jsx';
+import Header from './Header.jsx';
 
 export default () => (
   <div className="d-flex flex-column h-100">
-    <nav className="shadow-sm navbar navbar-expand-lg navbar-light bg-white">
-      <div className="container">
-        <a className="navbar-brand" href="/">Hexlet Chat</a>
-      </div>
-    </nav>
     <Router>
       <Switch>
         <Route exact path="/">
+          <Header />
           <HomePage />
         </Route>
         <Route path="/login">
+          <Header />
           <LoginPage />
         </Route>
         <Route>
+          <Header />
           <PageNotFound />
         </Route>
       </Switch>
