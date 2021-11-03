@@ -29,7 +29,6 @@ const LoginPage = () => {
         const response = await axios.post(routes.loginPath(), loginData);
         const { token, username } = response.data;
         auth.logIn(token, username);
-        console.log(auth.isLoggedIn());
         history.replace('/');
       } catch (error) {
         if (!error.isAxiosError || error.response.status !== 401) {
