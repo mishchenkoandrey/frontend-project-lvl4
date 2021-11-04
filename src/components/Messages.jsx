@@ -1,9 +1,11 @@
 // @ts-check
 
 import React, { useEffect } from 'react';
+import { Col } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { animateScroll as scroll } from 'react-scroll';
 import _ from 'lodash';
+
 import Message from './Message.jsx';
 
 const Messages = () => {
@@ -28,26 +30,28 @@ const Messages = () => {
   }, [currentChannelId, messages]);
 
   return (
-    <>
-      <div className="bg-light mb-4 p-3 shadow-sm small">
-        <p className="m-0">
-          <b>
-            {currentChannel && (
-              <>
-                <span className="me-1">#</span>
-                {currentChannel.name}
-              </>
-            )}
-          </b>
-        </p>
-        <span className="text-muted">
-          {`${messages.length} сообщений`}
-        </span>
+    <Col className="p-0 h-100" as="main">
+      <div className="d-flex flex-column h-100">
+        <header className="bg-light mb-4 p-3 shadow-sm small">
+          <p className="m-0">
+            <b>
+              {currentChannel && (
+                <>
+                  <span className="me-1">#</span>
+                  {currentChannel.name}
+                </>
+              )}
+            </b>
+          </p>
+          <span className="text-muted">
+            {`${messages.length} сообщений`}
+          </span>
+        </header>
+        <div id="messages-box" className="chat-messages overflow-auto mb-3">
+          {currentChannelMessages.map((message) => <Message key={message.id} message={message} />)}
+        </div>
       </div>
-      <div id="messages-box" className="chat-messages overflow-auto mb-3">
-        {currentChannelMessages.map((message) => <Message key={message.id} message={message} />)}
-      </div>
-    </>
+    </Col>
   );
 };
 export default Messages;

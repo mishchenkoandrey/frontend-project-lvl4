@@ -2,7 +2,8 @@
 
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Button, Nav } from 'react-bootstrap';
+import { Button, Nav, Col } from 'react-bootstrap';
+
 import { setCurrentChannelId } from '../slices/channelsSlice.js';
 import DefaultChannel from './DefaultChannel.jsx';
 import ControlledChannel from './ControlledChannel.jsx';
@@ -15,7 +16,7 @@ const Channels = () => {
   const handleActiveChannel = (channelId) => () => dispatch(setCurrentChannelId({ channelId }));
 
   return (
-    <>
+    <Col xs={4} md={2} className="border-end pt-5 px-0 bg-light" as="aside">
       <div className="d-flex justify-content-between mb-2 ps-4 pe-2">
         <span>channels</span>
         <Button
@@ -50,7 +51,7 @@ const Channels = () => {
           );
         })}
       </Nav>
-    </>
+    </Col>
   );
 };
 

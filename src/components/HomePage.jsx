@@ -2,7 +2,7 @@
 
 import axios from 'axios';
 import React, { useEffect } from 'react';
-import { Container, Row, Col } from 'react-bootstrap';
+import { Container, Row } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 
 import routes from '../routes.js';
@@ -38,14 +38,8 @@ const HomePage = () => {
   return (
     <Container className="h-100 my-4 overflow-hidden rounded shadow">
       <Row className="h-100 bg-white">
-        <Col xs={4} md={2} className="border-end pt-5 px-0 bg-light">
-          <Channels />
-        </Col>
-        <Col className="p-0 h-100">
-          <div className="d-flex flex-column h-100">
-            <Messages />
-          </div>
-        </Col>
+        <Channels />
+        <Messages />
       </Row>
     </Container>
   );
