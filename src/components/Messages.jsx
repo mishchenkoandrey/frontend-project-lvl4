@@ -7,12 +7,12 @@ import { animateScroll as scroll } from 'react-scroll';
 import _ from 'lodash';
 
 import Message from './Message.jsx';
+import MessageForm from './MessageForm.jsx';
 
 const Messages = () => {
   const currentChannelId = useSelector((state) => state.channelsInfo.currentChannelId);
   const findCurrentChannel = (state) => _.find(state.channelsInfo.channels, ['id', currentChannelId]);
   const currentChannel = useSelector(findCurrentChannel);
-  console.log(currentChannel);
   const messages = useSelector((state) => state.messages);
   const currentChannelMessages = messages.filter(
     ({ channelId }) => channelId === currentChannelId,
@@ -49,6 +49,9 @@ const Messages = () => {
         </header>
         <div id="messages-box" className="chat-messages overflow-auto mb-3">
           {currentChannelMessages.map((message) => <Message key={message.id} message={message} />)}
+        </div>
+        <div className="mt-auto px-5 py-3">
+          <MessageForm />
         </div>
       </div>
     </Col>
