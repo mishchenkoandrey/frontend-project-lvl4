@@ -21,7 +21,7 @@ const buildState = (defaultState) => {
       { id: 1, username: 'admin', password: 'admin' },
     ],
   };
-  console.log('Users: ', state.users);
+
   if (defaultState.messages) {
     state.messages.push(...defaultState.messages);
   }
