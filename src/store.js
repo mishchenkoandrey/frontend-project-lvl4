@@ -7,10 +7,11 @@ import messagesReducer from './slices/messagesSlice.js';
 export default () => {
   const store = configureStore({
     reducer: {
-      channelsInfo: channelsReducer,
-      messages: messagesReducer,
+      channelsInfo: channelsReducer.reducer,
+      messages: messagesReducer.reducer,
     },
   });
-
+  console.log(channelsReducer.reducer);
+  console.log(messagesReducer.reducer);
   return store;
 };

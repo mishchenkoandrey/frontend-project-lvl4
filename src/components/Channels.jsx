@@ -37,8 +37,6 @@ const Channels = () => {
               key={id}
               name={name}
               btnVariant={btnVariant}
-              removeChannel={removeChannel(id)}
-              renameChannel={renameChannel(id)}
               handleActiveChannel={handleActiveChannel(id)}
             />
           ) : (

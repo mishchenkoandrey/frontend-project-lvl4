@@ -8,8 +8,6 @@ import {
 const ControlledChannel = ({
   name,
   btnVariant,
-  removeChannel,
-  renameChannel,
   handleActiveChannel,
 }) => (
   <Nav.Item className="w-100" as="li">
@@ -24,8 +22,8 @@ const ControlledChannel = ({
       </Button>
       <Dropdown.Toggle split variant={btnVariant} className="flex-grow-0" />
       <Dropdown.Menu>
-        <Dropdown.Item onClick={removeChannel}>remove</Dropdown.Item>
-        <Dropdown.Item onClick={renameChannel}>rename</Dropdown.Item>
+        <Dropdown.Item>remove</Dropdown.Item>
+        <Dropdown.Item>rename</Dropdown.Item>
       </Dropdown.Menu>
     </Dropdown>
   </Nav.Item>
