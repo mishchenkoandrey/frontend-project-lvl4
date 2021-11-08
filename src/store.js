@@ -11,7 +11,5 @@ export default () => {
       messages: messagesReducer.reducer,
     },
   });
-  console.log(channelsReducer.reducer);
-  console.log(messagesReducer.reducer);
   return store;
 };
