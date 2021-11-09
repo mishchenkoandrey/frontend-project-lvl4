@@ -5,7 +5,7 @@ import createStore from './store.js';
 import { addNewMessage } from './slices/messagesSlice.js';
 import SocketProvider from './components/SocketProvider.jsx';
 import App from './components/App.jsx';
-import ProvideAuth from './components/ProvideAuth.jsx';
+import AuthProvider from './components/AuthProvider.jsx';
 
 export default async (socket) => {
   const store = createStore();
@@ -16,9 +16,9 @@ export default async (socket) => {
   return (
     <Provider store={store}>
       <SocketProvider socket={socket}>
-        <ProvideAuth>
+        <AuthProvider>
           <App />
-        </ProvideAuth>
+        </AuthProvider>
       </SocketProvider>
     </Provider>
   );
