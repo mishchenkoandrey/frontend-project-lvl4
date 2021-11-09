@@ -2,6 +2,7 @@
 import 'core-js/stable/index.js';
 import 'regenerator-runtime/runtime.js';
 import ReactDOM from 'react-dom';
+import { io } from 'socket.io-client';
 
 import '../assets/application.scss';
 import init from './init.jsx';
@@ -13,7 +14,8 @@ const runApp = async () => {
     localStorage.debug = 'chat:*';
   }
 
-  const vdom = await init();
+  const socket = io();
+  const vdom = await init(socket);
   const container = document.querySelector('#chat');
 
   ReactDOM.render(vdom, container);

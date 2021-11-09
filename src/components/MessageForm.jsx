@@ -5,9 +5,11 @@ import { useSelector } from 'react-redux';
 import { useFormik } from 'formik';
 import { Form, Button, InputGroup } from 'react-bootstrap';
 
+import useSocket from '../hooks/useSocket.js';
 import useAuth from '../hooks/useAuth.js';
 
 const MessageForm = () => {
+  const socket = useSocket();
   const auth = useAuth();
   const username = auth.getUsername();
   const currentChannelId = useSelector((state) => state.channelsInfo.currentChannelId);
@@ -28,7 +30,7 @@ const MessageForm = () => {
         channelId: currentChannelId,
       };
       try {
-        console.log(message);
+        socket.sendMessage(message);
         resetForm();
       } catch (error) {
         setErrors({ body: error.message });
