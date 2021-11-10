@@ -47,7 +47,7 @@ const Messages = () => {
             {`${messages.length} сообщений`}
           </span>
         </header>
-        <div id="messages-box" className="chat-messages overflow-auto mb-3">
+        <div id="messages-box" className="chat-messages overflow-auto px-5">
           {currentChannelMessages.map((message) => <Message key={message.id} message={message} />)}
         </div>
         <div className="mt-auto px-5 py-3">
