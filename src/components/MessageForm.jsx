@@ -34,7 +34,9 @@ const MessageForm = () => {
       } catch (error) {
         setErrors({ body: error.message });
       }
-      formik.setSubmitting(false);
+      setTimeout(() => {
+        formik.setSubmitting(false);
+      }, 3000);
     },
   });
 
