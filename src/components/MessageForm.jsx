@@ -39,6 +39,7 @@ const MessageForm = () => {
 
   useEffect(() => {
     inputRef.current.focus();
+    formik.isSubmitting = false;
   }, [formik.isSubmitting]);
 
   return (
