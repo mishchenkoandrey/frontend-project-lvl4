@@ -40,7 +40,7 @@ const MessageForm = () => {
       }
     },
   });
-
+  console.log(formik.isSubmitting, !formik.isValid, !formik.dirty);
   return (
     <Form
       noValidate
