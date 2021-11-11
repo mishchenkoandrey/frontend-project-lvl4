@@ -5,6 +5,9 @@ export default {
     username: yup.string().trim().required(),
     password: yup.string().required(),
   }),
+  MessageFormSchema: yup.object({
+    body: yup.string().trim().required(),
+  }),
   ChannelIteractionFormSchema: yup.object({
     channelName: yup.string().trim().required()
       .min(3, () => ({ key: 'validation.channelName' }))
