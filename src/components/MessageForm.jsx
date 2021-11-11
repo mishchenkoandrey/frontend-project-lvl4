@@ -34,13 +34,13 @@ const MessageForm = () => {
       } catch (error) {
         setErrors({ body: error.message });
       }
+      formik.setSubmitting(false);
     },
   });
 
   useEffect(() => {
     inputRef.current.focus();
-    formik.isSubmitting = false;
-  });
+  }, [formik.isSubmitting]);
 
   return (
     <Form
