@@ -13,7 +13,7 @@ const ControlledChannel = ({
   handleActiveChannel,
 }) => (
   <Nav.Item className="w-100" as="li">
-    <Dropdown as={ButtonGroup} className="d-flex mb-2">
+    <Dropdown as={ButtonGroup} className="d-flex">
       <Button
         onClick={handleActiveChannel}
         variant={btnVariant}
