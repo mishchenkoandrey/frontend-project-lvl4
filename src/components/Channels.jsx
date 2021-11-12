@@ -19,6 +19,16 @@ const Channels = () => {
     dispatch(openModalWindow({ type: 'adding' }));
   };
 
+  const removeChannel = (channelId) => (e) => {
+    e.preventDefault();
+    dispatch(openModalWindow({ type: 'removing', channelId }));
+  };
+
+  const renameChannel = (channelId) => (e) => {
+    e.preventDefault();
+    dispatch(openModalWindow({ type: 'renaming', channelId }));
+  };
+
   return (
     <Col xs={4} md={2} className="border-end pt-5 px-0 bg-light" as="aside">
       <div className="d-flex justify-content-between mb-2 ps-4 pe-2">
@@ -42,6 +52,8 @@ const Channels = () => {
               key={id}
               name={name}
               btnVariant={btnVariant}
+              removeChannel={removeChannel(id)}
+              renameChannel={renameChannel(id)}
               handleActiveChannel={handleActiveChannel(id)}
             />
           ) : (
