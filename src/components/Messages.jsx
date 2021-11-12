@@ -44,7 +44,7 @@ const Messages = () => {
             </b>
           </p>
           <span className="text-muted">
-            {`${messages.length} сообщений`}
+            {`${currentChannelMessages.length} сообщений`}
           </span>
         </header>
         <div id="messages-box" className="chat-messages overflow-auto px-5">

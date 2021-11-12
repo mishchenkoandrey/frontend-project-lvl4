@@ -9,6 +9,7 @@ import routes from '../routes.js';
 import useAuth from '../hooks/useAuth.js';
 import Channels from './Channels.jsx';
 import Messages from './Messages.jsx';
+import ModalWindow from './ModalWindow.jsx';
 import { initChannels } from '../slices/channelsSlice.js';
 
 const HomePage = () => {
@@ -36,12 +37,15 @@ const HomePage = () => {
   }, []);
 
   return (
-    <Container className="h-100 my-4 overflow-hidden rounded shadow">
-      <Row className="h-100 bg-white">
-        <Channels />
-        <Messages />
-      </Row>
-    </Container>
+    <>
+      <Container className="h-100 my-4 overflow-hidden rounded shadow">
+        <Row className="h-100 bg-white">
+          <Channels />
+          <Messages />
+        </Row>
+      </Container>
+      <ModalWindow />
+    </>
   );
 };
 

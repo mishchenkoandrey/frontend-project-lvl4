@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Button, Nav, Col } from 'react-bootstrap';
 
 import { setCurrentChannelId } from '../slices/channelsSlice.js';
+import { openModalWindow } from '../slices/modalWindowSlice.js';
 import DefaultChannel from './DefaultChannel.jsx';
 import ControlledChannel from './ControlledChannel.jsx';
 
@@ -12,14 +13,18 @@ const Channels = () => {
   const channels = useSelector((state) => state.channelsInfo.channels);
   const currentChannelId = useSelector((state) => state.channelsInfo.currentChannelId);
   const dispatch = useDispatch();
-
   const handleActiveChannel = (channelId) => () => dispatch(setCurrentChannelId({ channelId }));
+
+  const addChannel = () => {
+    dispatch(openModalWindow({ type: 'adding' }));
+  };
 
   return (
     <Col xs={4} md={2} className="border-end pt-5 px-0 bg-light" as="aside">
       <div className="d-flex justify-content-between mb-2 ps-4 pe-2">
         <span>channels</span>
         <Button
+          onClick={addChannel}
           variant="link"
           className="p-0 text-primary btn-group-vertical"
         >
