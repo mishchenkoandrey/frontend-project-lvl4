@@ -55,7 +55,7 @@ const PanelForm = ({
             onClick={closeModal}
             type="button"
             variant="secondary"
-            className="mr-2"
+            className="me-2"
           >
             cancel
           </Button>
@@ -115,9 +115,9 @@ const RemovingPanel = ({ closeModal }) => {
 
   return (
     <>
-      <p>areYouSure</p>
-      <div className="d-flex justify-content-between">
-        <Button onClick={closeModal} variant="secondary" className="mr-2">
+      <p className="lead">areYouSure</p>
+      <div className="d-flex justify-content-end">
+        <Button onClick={closeModal} variant="secondary" className="me-2">
           cancel
         </Button>
         <Button onClick={removeChannel(currentChannel)} variant="danger">
