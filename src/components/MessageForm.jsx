@@ -22,7 +22,7 @@ const MessageForm = () => {
     },
     validateOnMount: true,
     validationSchema: validationSchemas.MessageFormSchema,
-    onSubmit: ({ body }, { setErrors, resetForm }) => {
+    onSubmit: ({ body }, { resetForm }) => {
       const message = {
         nickname: username,
         body,
@@ -32,11 +32,12 @@ const MessageForm = () => {
         socket.sendMessage(message);
         resetForm();
       } catch (error) {
-        setErrors({ body: error.message });
+        if (error.message === 'networkError') {
+          setTimeout(() => {
+            formik.setSubmitting(false);
+          }, 3000);
+        }
       }
-      setTimeout(() => {
-        formik.setSubmitting(false);
-      }, 3000);
     },
   });
 
