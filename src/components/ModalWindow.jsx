@@ -182,7 +182,7 @@ const ModalWindow = () => {
   const ControllPanel = controllPanels[type];
 
   return (
-    <Modal show={isVisible} onHide={closeModal}>
+    <Modal show={isVisible} onHide={closeModal} centered>
       <Modal.Header closeButton>
         <Modal.Title>{modalTitleKeysMap[type]}</Modal.Title>
       </Modal.Header>
