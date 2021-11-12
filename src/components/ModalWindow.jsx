@@ -165,10 +165,7 @@ const controllPanels = {
 };
 
 const ModalWindow = () => {
-  const isVisible = useSelector((state) => {
-    console.log(state);
-    return state.modalWindowInfo.isVisible;
-  });
+  const isVisible = useSelector((state) => state.modalWindowInfo.isVisible);
   const type = useSelector((state) => state.modalWindowInfo.type);
   const dispatch = useDispatch();
 
