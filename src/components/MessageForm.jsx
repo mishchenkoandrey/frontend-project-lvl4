@@ -40,11 +40,9 @@ const MessageForm = () => {
     },
   });
 
-  console.log(formik);
-
   useEffect(() => {
     inputRef.current.focus();
-  }, [formik.isSubmitting]);
+  }, [currentChannelId, formik.isSubmitting]);
 
   return (
     <Form
