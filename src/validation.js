@@ -8,10 +8,9 @@ export default {
   MessageFormSchema: yup.object({
     body: yup.string().trim().required(),
   }),
-  ChannelIteractionFormSchema: yup.object({
-    channelName: yup.string().trim().required()
-      .min(3, () => ({ key: 'validation.channelName' }))
-      .max(20, () => ({ key: 'validation.channelName' })),
+  ChannelFormSchema: (channelsNames) => yup.object().shape({
+    name: yup.string().required().notOneOf(channelsNames).min(3)
+      .max(20),
   }),
   RegistrationFormSchema: yup.object({
     username: yup.string().trim().required()

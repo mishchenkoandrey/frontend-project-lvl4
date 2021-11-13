@@ -8,7 +8,7 @@ const slice = createSlice({
   initialState: [],
   reducers: {
     addNewMessage: (state, { payload: { message } }) => {
-      state.push(message);
+      state.push({ ...message, body: message.body.trim() });
     },
   },
   extraReducers: (builder) => {
