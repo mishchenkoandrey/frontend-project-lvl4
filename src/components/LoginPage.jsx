@@ -3,8 +3,8 @@
 import axios from 'axios';
 import React, { useEffect, useRef, useState } from 'react';
 import { useFormik } from 'formik';
-import { Button, Form } from 'react-bootstrap';
-import { useHistory } from 'react-router-dom';
+import { Button, Card, Form } from 'react-bootstrap';
+import { useHistory, Link } from 'react-router-dom';
 import useAuth from '../hooks/useAuth.js';
 import routes from '../routes.js';
 import validationSchemas from '../validation.js';
@@ -44,8 +44,8 @@ const LoginPage = () => {
     <div className="container-fluid h-100">
       <div className="row justify-content-center align-content-center h-100">
         <div className="col-12 col-sm-8 col-md-6 col-xxl-4">
-          <div className="card shadow-sm">
-            <div className="card-body row p-5">
+          <Card className="shadow-sm">
+            <Card.Body className="row p-5">
               <Form onSubmit={formik.handleSubmit} className="mt-3 mt-mb-0">
                 <h1 className="text-center mb-4">Войти</h1>
                 <Form.Group className="form-floating mb-3">
@@ -93,8 +93,14 @@ const LoginPage = () => {
                 </Form.Group>
                 <Button type="submit" variant="outline-primary" disabled={formik.isSubmitting}>Submit</Button>
               </Form>
-            </div>
-          </div>
+            </Card.Body>
+            <Card.Footer className="p-4">
+              <div className="d-flex justify-content-center gap-1">
+                <span>Нет аккаунта?</span>
+                <Link to="/signup">Регистрация</Link>
+              </div>
+            </Card.Footer>
+          </Card>
         </div>
       </div>
     </div>
