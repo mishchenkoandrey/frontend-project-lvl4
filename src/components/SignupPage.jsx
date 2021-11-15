@@ -8,9 +8,9 @@ import {
 } from 'react-bootstrap';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
-import Header from './Header.jsx';
 import routes from '../routes.js';
 import useAuth from '../hooks/useAuth.js';
+import validationSchemas from '../validation.js';
 
 const SignupForm = () => {
   const history = useHistory();
@@ -28,14 +28,7 @@ const SignupForm = () => {
       password: '',
       confirmPassword: '',
     },
-    validationSchema: yup.object().shape({
-      username: yup.string().required().min(3).max(20),
-      password: yup.string().required().min(6, 'minChars'),
-      confirmPassword: yup
-        .string()
-        .required()
-        .oneOf([yup.ref('password'), null]),
-    }),
+    validationSchema: validationSchemas.RegistrationFormSchema,
     onSubmit: async ({ username, password }) => {
       const credentials = { username, password };
       try {
@@ -58,14 +51,13 @@ const SignupForm = () => {
       <h1 className="text-center mb-4">Регистрация</h1>
       <Form.Group>
         <FloatingLabel
-          controlId="floatingInput"
+          controlId="username"
           label="Username"
           className="mb-3"
         >
           <Form.Control
             type="text"
             name="username"
-            id="username"
             value={formik.values.username}
             ref={inputRef}
             onChange={formik.handleChange}
@@ -83,14 +75,13 @@ const SignupForm = () => {
       </Form.Group>
       <Form.Group>
         <FloatingLabel
-          controlId="floatingInput"
+          controlId="password"
           label="Password"
           className="mb-3"
         >
           <Form.Control
             type="password"
             name="password"
-            id="password"
             value={formik.values.password}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
@@ -107,14 +98,13 @@ const SignupForm = () => {
       </Form.Group>
       <Form.Group>
         <FloatingLabel
-          controlId="floatingInput"
+          controlId="confirmPassword"
           label="Confirm Password"
           className="mb-4"
         >
           <Form.Control
             type="password"
             name="confirmPassword"
-            id="confirmPassword"
             value={formik.values.confirmPassword}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
@@ -140,19 +130,17 @@ const SignupForm = () => {
 };
 
 const SignupPage = () => (
-  <>
-    <Container fluid className="h-100">
-      <Row className="row justify-content-center align-content-center h-100">
-        <Col sm={4}>
-          <Card className="shadow-sm">
-            <Card.Body className="row p-5">
-              <SignupForm />
-            </Card.Body>
-          </Card>
-        </Col>
-      </Row>
-    </Container>
-  </>
+  <Container fluid className="h-100">
+    <Row className="row justify-content-center align-content-center h-100">
+      <Col sm={8} md={6} xxl={4}>
+        <Card className="shadow-sm">
+          <Card.Body className="row p-5">
+            <SignupForm />
+          </Card.Body>
+        </Card>
+      </Col>
+    </Row>
+  </Container>
 );
 
 export default SignupPage;
