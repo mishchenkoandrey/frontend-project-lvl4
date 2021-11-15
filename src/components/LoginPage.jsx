@@ -91,7 +91,7 @@ const LoginPage = () => {
                   ) : null}
                   <Form.Control.Feedback type="invalid">the username or password is incorrect</Form.Control.Feedback>
                 </Form.Group>
-                <Button type="submit" variant="outline-primary" disabled={formik.isSubmitting}>Submit</Button>
+                <Button type="submit" variant="outline-primary" className="w-100 mb-3" disabled={formik.isSubmitting}>Submit</Button>
               </Form>
             </Card.Body>
             <Card.Footer className="p-4">
