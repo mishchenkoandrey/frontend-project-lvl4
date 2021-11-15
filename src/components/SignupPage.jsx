@@ -4,7 +4,7 @@ import { useFormik } from 'formik';
 import React, { useRef, useEffect, useState } from 'react';
 import * as yup from 'yup';
 import {
-  Container, Row, Col, Form, Button,
+  Container, Row, Col, Form, Button, Card, FloatingLabel,
 } from 'react-bootstrap';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
@@ -55,68 +55,82 @@ const SignupForm = () => {
 
   return (
     <Form onSubmit={formik.handleSubmit} className="p-3">
+      <h1 className="text-center mb-4">Регистрация</h1>
       <Form.Group>
-        <Form.Label htmlFor="username">username</Form.Label>
-        <Form.Control
-          type="text"
-          name="username"
-          id="username"
-          value={formik.values.username}
-          ref={inputRef}
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          placeholder="minMaxChars"
-          autoComplete="username"
-          isInvalid={
-            (formik.errors.username && formik.touched.username) || !isValidData
-          }
-        />
-        <Form.Control.Feedback type="invalid">
-          {formik.errors.username}
-        </Form.Control.Feedback>
+        <FloatingLabel
+          controlId="floatingInput"
+          label="Username"
+          className="mb-3"
+        >
+          <Form.Control
+            type="text"
+            name="username"
+            id="username"
+            value={formik.values.username}
+            ref={inputRef}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            placeholder="minMaxChars"
+            autoComplete="username"
+            isInvalid={
+              (formik.errors.username && formik.touched.username) || !isValidData
+            }
+          />
+          <Form.Control.Feedback type="invalid">
+            {formik.errors.username}
+          </Form.Control.Feedback>
+        </FloatingLabel>
       </Form.Group>
       <Form.Group>
-        <Form.Label htmlFor="password">password</Form.Label>
-        <Form.Control
-          type="password"
-          name="password"
-          id="password"
-          value={formik.values.password}
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          placeholder="minChars"
-          autoComplete="new-password"
-          isInvalid={
-            (formik.errors.password && formik.touched.password) || !isValidData
-          }
-        />
-        <Form.Control.Feedback type="invalid">
-          {formik.errors.password}
-        </Form.Control.Feedback>
+        <FloatingLabel
+          controlId="floatingInput"
+          label="Password"
+          className="mb-3"
+        >
+          <Form.Control
+            type="password"
+            name="password"
+            id="password"
+            value={formik.values.password}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            placeholder="minChars"
+            autoComplete="new-password"
+            isInvalid={
+              (formik.errors.password && formik.touched.password) || !isValidData
+            }
+          />
+          <Form.Control.Feedback type="invalid">
+            {formik.errors.password}
+          </Form.Control.Feedback>
+        </FloatingLabel>
       </Form.Group>
       <Form.Group>
-        <Form.Label htmlFor="confirmPassword">
-          confirmPassword
-        </Form.Label>
-        <Form.Control
-          type="password"
-          name="confirmPassword"
-          id="confirmPassword"
-          value={formik.values.confirmPassword}
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          placeholder="passwordsMustMatch"
-          autoComplete="new-password"
-          isInvalid={
-            (formik.errors.confirmPassword && formik.touched.confirmPassword)
-            || !isValidData
-          }
-        />
-        <Form.Control.Feedback type="invalid">
-          {!isValidData
-            ? 'userAlreadyExists'
-            : formik.errors.confirmPassword}
-        </Form.Control.Feedback>
+        <FloatingLabel
+          controlId="floatingInput"
+          label="Confirm Password"
+          className="mb-4"
+        >
+          <Form.Control
+            type="password"
+            name="confirmPassword"
+            id="confirmPassword"
+            value={formik.values.confirmPassword}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            placeholder="passwordsMustMatch"
+            autoComplete="new-password"
+            isInvalid={
+              (formik.errors.confirmPassword && formik.touched.confirmPassword)
+              || !isValidData
+            }
+          />
+          <Form.Control.Feedback type="invalid">
+            {!isValidData
+              ? 'userAlreadyExists'
+              : formik.errors.confirmPassword}
+          </Form.Control.Feedback>
+        </FloatingLabel>
       </Form.Group>
       <Button type="submit" variant="outline-primary" className="w-100" disabled={formik.isSubmitting || !formik.isValid}>
         signup
@@ -127,10 +141,14 @@ const SignupForm = () => {
 
 const SignupPage = () => (
   <>
-    <Container fluid>
-      <Row className="justify-content-center pt-5">
+    <Container fluid className="h-100">
+      <Row className="row justify-content-center align-content-center h-100">
         <Col sm={4}>
-          <SignupForm />
+          <Card className="shadow-sm">
+            <Card.Body className="row p-5">
+              <SignupForm />
+            </Card.Body>
+          </Card>
         </Col>
       </Row>
     </Container>
