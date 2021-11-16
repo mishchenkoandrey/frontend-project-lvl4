@@ -131,7 +131,7 @@ const SignupForm = () => {
 
 const SignupPage = () => (
   <Container fluid className="h-100">
-    <Row className="row justify-content-center align-content-center h-100">
+    <Row className="justify-content-center align-content-center h-100">
       <Col sm={8} md={6} xxl={4}>
         <Card className="shadow-sm">
           <Card.Body className="row p-5">
