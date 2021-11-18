@@ -3,7 +3,7 @@
 import React from 'react';
 import useSocket from '../hooks/useSocket.js';
 
-import PanelForm from './PanelForm.jsx';
+import ChannelForm from './ChannelForm.jsx';
 
 const AddingPanel = ({ closeModal }) => {
   const socket = useSocket();
@@ -20,7 +20,7 @@ const AddingPanel = ({ closeModal }) => {
   };
 
   return (
-    <PanelForm
+    <ChannelForm
       initialName={initialName}
       handleSubmit={addChannel}
       closeModal={closeModal}

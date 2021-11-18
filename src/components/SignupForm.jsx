@@ -5,11 +5,16 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useFormik } from 'formik';
 import { Button, Form, FloatingLabel } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+import _ from 'lodash';
+
 import useAuth from '../hooks/useAuth.js';
 import routes from '../routes.js';
 import validationSchemas from '../validation.js';
 
 const SignupForm = () => {
+  const { signupFormSchema } = validationSchemas();
+  const { t } = useTranslation();
   const history = useHistory();
   const [isValidData, setIsValidData] = useState(true);
   const inputRef = useRef();
@@ -25,7 +30,7 @@ const SignupForm = () => {
       password: '',
       confirmPassword: '',
     },
-    validationSchema: validationSchemas.RegistrationFormSchema,
+    validationSchema: signupFormSchema,
     onSubmit: async ({ username, password }) => {
       const credentials = { username, password };
       try {
@@ -43,13 +48,18 @@ const SignupForm = () => {
     },
   });
 
+  const validationParams = signupFormSchema.describe().fields;
+  const usernameMinCharsCount = _.find(validationParams.username.tests, ['name', 'min']).params.min;
+  const usernameMaxCharsCount = _.find(validationParams.username.tests, ['name', 'max']).params.max;
+  const passwordMinCharsCount = _.find(validationParams.password.tests, ['name', 'min']).params.min;
+
   return (
     <Form onSubmit={formik.handleSubmit} className="p-3">
       <h1 className="text-center mb-4">Регистрация</h1>
       <Form.Group>
         <FloatingLabel
           controlId="username"
-          label="Username"
+          label={t('username')}
           className="mb-3"
         >
           <Form.Control
@@ -59,21 +69,21 @@ const SignupForm = () => {
             ref={inputRef}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
-            placeholder="minMaxChars"
+            placeholder={t('fromToChars', { min: usernameMinCharsCount, max: usernameMaxCharsCount })}
             autoComplete="username"
             isInvalid={
               (formik.errors.username && formik.touched.username) || !isValidData
             }
           />
           <Form.Control.Feedback type="invalid">
-            {formik.errors.username}
+            {t(formik.errors.username)}
           </Form.Control.Feedback>
         </FloatingLabel>
       </Form.Group>
       <Form.Group>
         <FloatingLabel
           controlId="password"
-          label="Password"
+          label={t('password')}
           className="mb-3"
         >
           <Form.Control
@@ -82,7 +92,7 @@ const SignupForm = () => {
             value={formik.values.password}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
-            placeholder="minChars"
+            placeholder={t('atLeastChars', { min: passwordMinCharsCount })}
             autoComplete="new-password"
             isInvalid={
               (formik.errors.password && formik.touched.password) || !isValidData
@@ -96,7 +106,7 @@ const SignupForm = () => {
       <Form.Group>
         <FloatingLabel
           controlId="confirmPassword"
-          label="Confirm Password"
+          label={t('confirmPassword')}
           className="mb-4"
         >
           <Form.Control
@@ -105,7 +115,7 @@ const SignupForm = () => {
             value={formik.values.confirmPassword}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
-            placeholder="passwordsMustMatch"
+            placeholder={t('passwordsMustMatch')}
             autoComplete="new-password"
             isInvalid={
               (formik.errors.confirmPassword && formik.touched.confirmPassword)
@@ -114,14 +124,12 @@ const SignupForm = () => {
           />
           <Form.Control.Feedback type="invalid">
             {!isValidData
-              ? 'userAlreadyExists'
+              ? t('suchUserAlreadyExists')
               : formik.errors.confirmPassword}
           </Form.Control.Feedback>
         </FloatingLabel>
       </Form.Group>
-      <Button type="submit" variant="outline-primary" className="w-100" disabled={formik.isSubmitting || !formik.isValid}>
-        signup
-      </Button>
+      <Button type="submit" variant="outline-primary" className="w-100" disabled={formik.isSubmitting || !formik.isValid}>{t('signup')}</Button>
     </Form>
   );
 };

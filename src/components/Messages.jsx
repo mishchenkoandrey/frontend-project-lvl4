@@ -5,11 +5,13 @@ import { Col } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { animateScroll as scroll } from 'react-scroll';
 import _ from 'lodash';
+import { useTranslation } from 'react-i18next';
 
 import Message from './Message.jsx';
 import MessageForm from './MessageForm.jsx';
 
 const Messages = () => {
+  const { t } = useTranslation();
   const currentChannelId = useSelector((state) => state.channelsInfo.currentChannelId);
   const findCurrentChannel = (state) => _.find(state.channelsInfo.channels, ['id', currentChannelId]);
   const currentChannel = useSelector(findCurrentChannel);
@@ -44,7 +46,7 @@ const Messages = () => {
             </b>
           </p>
           <span className="text-muted">
-            {`${currentChannelMessages.length} сообщений`}
+            {t('messages.count', { count: currentChannelMessages.length })}
           </span>
         </header>
         <div id="messages-box" className="chat-messages overflow-auto px-5">

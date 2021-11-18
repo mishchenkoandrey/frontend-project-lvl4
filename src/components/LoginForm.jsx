@@ -5,11 +5,15 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useFormik } from 'formik';
 import { Button, Form } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+
 import useAuth from '../hooks/useAuth.js';
 import routes from '../routes.js';
 import validationSchemas from '../validation.js';
 
 const LoginForm = () => {
+  const { loginFormSchema } = validationSchemas();
+  const { t } = useTranslation();
   const auth = useAuth();
   const [isAuthFailed, setIsAuthFailed] = useState(false);
   const inputRef = useRef();
@@ -23,7 +27,7 @@ const LoginForm = () => {
       username: '',
       password: '',
     },
-    validationSchema: validationSchemas.LoginFormSchema,
+    validationSchema: loginFormSchema,
     onSubmit: async (loginData) => {
       try {
         const response = await axios.post(routes.loginPath(), loginData);
@@ -42,13 +46,13 @@ const LoginForm = () => {
 
   return (
     <Form onSubmit={formik.handleSubmit} className="mt-3 mt-mb-0">
-      <h1 className="text-center mb-4">Войти</h1>
+      <h1 className="text-center mb-4">{t('login')}</h1>
       <Form.Group className="form-floating mb-3">
         <Form.Control
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           value={formik.values.username}
-          placeholder="Ваш ник"
+          placeholder={t('yourNick')}
           name="username"
           id="username"
           autoComplete="username"
@@ -59,7 +63,7 @@ const LoginForm = () => {
           className="form-control"
           disabled={formik.isSubmitting}
         />
-        <Form.Label htmlFor="username">Ваш ник</Form.Label>
+        <Form.Label htmlFor="username">{t('yourNick')}</Form.Label>
         {formik.touched.username && formik.errors.username ? (
           <Form.Control.Feedback type="invalid">{formik.errors.username}</Form.Control.Feedback>
         ) : null}
@@ -70,7 +74,7 @@ const LoginForm = () => {
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           value={formik.values.password}
-          placeholder="password"
+          placeholder={t('password')}
           name="password"
           id="password"
           autoComplete="current-password"
@@ -80,13 +84,13 @@ const LoginForm = () => {
           className="form-control"
           disabled={formik.isSubmitting}
         />
-        <Form.Label htmlFor="password">Password</Form.Label>
+        <Form.Label htmlFor="password">{t('password')}</Form.Label>
         {formik.touched.password && formik.errors.password ? (
           <Form.Control.Feedback type="invalid">{formik.errors.password}</Form.Control.Feedback>
         ) : null}
-        <Form.Control.Feedback type="invalid">the username or password is incorrect</Form.Control.Feedback>
+        <Form.Control.Feedback type="invalid">{t('invalidUsernameOrPassword')}</Form.Control.Feedback>
       </Form.Group>
-      <Button type="submit" variant="outline-primary" className="w-100 mb-3" disabled={formik.isSubmitting}>Submit</Button>
+      <Button type="submit" variant="outline-primary" className="w-100 mb-3" disabled={formik.isSubmitting}>{t('login')}</Button>
     </Form>
   );
 };

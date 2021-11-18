@@ -4,7 +4,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import useSocket from '../hooks/useSocket.js';
 
-import PanelForm from './PanelForm.jsx';
+import ChannelForm from './ChannelForm.jsx';
 
 const RenamingPanel = ({ closeModal }) => {
   const socket = useSocket();
@@ -24,7 +24,7 @@ const RenamingPanel = ({ closeModal }) => {
   };
 
   return (
-    <PanelForm
+    <ChannelForm
       initialName={initialName}
       handleSubmit={renameChannel(currentChannel)}
       closeModal={closeModal}

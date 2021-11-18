@@ -3,6 +3,7 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Modal } from 'react-bootstrap';
+import { useTranslation } from 'react-i18next';
 
 import { closeModalWindow } from '../slices/modalWindowSlice.js';
 import AddingPanel from './AddingPanel.jsx';
@@ -16,6 +17,7 @@ const ControlPanels = {
 };
 
 const ModalWindow = () => {
+  const { t } = useTranslation();
   const { isVisible, name } = useSelector((state) => state.modalWindowInfo);
   const dispatch = useDispatch();
 
@@ -28,7 +30,7 @@ const ModalWindow = () => {
   return (
     <Modal show={isVisible} onHide={closeModal} centered>
       <Modal.Header closeButton>
-        <Modal.Title>{name}</Modal.Title>
+        <Modal.Title>{t(name)}</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         {ControlPanel

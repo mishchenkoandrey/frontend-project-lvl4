@@ -4,14 +4,17 @@ import React, { useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import { useFormik } from 'formik';
 import { Form, Button } from 'react-bootstrap';
+import { useTranslation } from 'react-i18next';
 
 import validationSchemas from '../validation.js';
 
-const PanelForm = ({
+const ChannelForm = ({
   initialName,
   handleSubmit,
   closeModal,
 }) => {
+  const { channelFormSchema } = validationSchemas();
+  const { t } = useTranslation();
   const inputRef = useRef();
   const channels = useSelector((state) => state.channelsInfo.channels);
   const channelsNames = channels.map(({ name }) => name);
@@ -19,7 +22,7 @@ const PanelForm = ({
     initialValues: {
       name: initialName,
     },
-    validationSchema: validationSchemas.ChannelFormSchema(channelsNames),
+    validationSchema: channelFormSchema(channelsNames),
     onSubmit: handleSubmit,
     validateOnChange: false,
   });
@@ -56,15 +59,13 @@ const PanelForm = ({
             variant="secondary"
             className="me-2"
           >
-            cancel
+            {t('cancel')}
           </Button>
-          <Button type="submit" variant="primary" disabled={formik.isSubmitting}>
-            send
-          </Button>
+          <Button type="submit" variant="primary" disabled={formik.isSubmitting}>{t('send')}</Button>
         </div>
       </Form.Group>
     </Form>
   );
 };
 
-export default PanelForm;
+export default ChannelForm;

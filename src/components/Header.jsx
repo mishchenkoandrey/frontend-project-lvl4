@@ -2,10 +2,12 @@
 
 import React from 'react';
 import { Container, Navbar, Button } from 'react-bootstrap';
+import { useTranslation } from 'react-i18next';
 
 import useAuth from '../hooks/useAuth.js';
 
 const Header = () => {
+  const { t } = useTranslation();
   const auth = useAuth();
   const handleLogOut = () => {
     auth.logOut();
@@ -14,11 +16,9 @@ const Header = () => {
     <header className="shadow-sm" expand="lg" bg="white">
       <Navbar>
         <Container>
-          <Navbar.Brand as="a" href="/">
-            Hexlet Chat
-          </Navbar.Brand>
+          <Navbar.Brand as="a" href="/">{t('hexletChat')}</Navbar.Brand>
           {auth.isLoggedIn() && (
-            <Button onClick={handleLogOut}>Выйти</Button>
+            <Button onClick={handleLogOut}>{t('signout')}</Button>
           )}
         </Container>
       </Navbar>
