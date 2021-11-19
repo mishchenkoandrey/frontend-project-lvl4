@@ -1,3 +1,5 @@
+// @ts-check
+
 import React from 'react';
 import { Provider } from 'react-redux';
 import i18n from 'i18next';
