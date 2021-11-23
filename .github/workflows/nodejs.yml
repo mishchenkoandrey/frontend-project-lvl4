@@ -25,11 +25,8 @@ jobs:
         run: make lint
       - name: Run test
         run: make test
-      - name: Notify deploy to Rollbar
-        uses: rollbar/github-deploy-action@2.1.1
-        id: rollbar_deploy
-        with:
-          environment: 'production'
-          version: ${{ github.sha }}
-        env:
-          ROLLBAR_ACCESS_TOKEN: ${{ secrets.ROLLBAR_ACCESS_TOKEN }}
+      - name: run build
+        run: |
+          touch .env
+          echo ROLLBAR_TOKEN =${{ secrets.ROLLBAR_TOKEN }} >> .env
+          make build
