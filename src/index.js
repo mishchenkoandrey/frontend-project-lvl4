@@ -9,7 +9,7 @@ import init from './init.jsx';
 
 const runApp = async () => {
   const mode = process.env.NODE_ENV;
-  console.log(mode, process.env.ROLLBAR_TOKEN);
+
   if (mode !== 'production') {
     localStorage.debug = 'chat:*';
   }
