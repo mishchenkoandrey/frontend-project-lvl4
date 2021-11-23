@@ -27,7 +27,7 @@ module.exports = {
     mode === 'production'
       ? new webpack.DefinePlugin({
         'process.env': {
-          ROLLBAR_TOKEN: JSON.stringify(process.env.YOUR_VARIABLE),
+          ROLLBAR_TOKEN: JSON.stringify(process.env.ROLLBAR_TOKEN),
         },
       })
       : new Dotenv(),
