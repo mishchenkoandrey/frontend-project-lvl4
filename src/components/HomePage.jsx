@@ -17,6 +17,7 @@ import { initChannels } from '../slices/channelsSlice.js';
 const HomePage = () => {
   const dispatch = useDispatch();
   const auth = useAuth();
+  const { t } = useTranslation();
   const notify = () => toast.error(t('networkError'));
   const fetchData = async () => {
     const token = auth.getToken();
