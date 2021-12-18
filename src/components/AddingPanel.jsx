@@ -61,7 +61,7 @@ const AddingPanel = ({
           aria-label="add channel"
           className="mb-2 form-control"
           data-testid="add-channel"
-          isInvalid={!formik.isValid && !formik.isSubmitting}
+          isInvalid={!formik.isValid && formik.errors.name !== 'networkError'}
           autoComplete="off"
           disabled={formik.isSubmitting}
         />
