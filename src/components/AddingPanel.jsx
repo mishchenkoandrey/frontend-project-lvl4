@@ -9,12 +9,10 @@ import { toast } from 'react-toastify';
 import useSocket from '../hooks/useSocket.js';
 
 import validationSchemas from '../validation.js';
-// import ChannelForm from './ChannelForm.jsx';
 
 const AddingPanel = ({
   closeModal,
 }) => {
-  console.log(closeModal);
   const socket = useSocket();
   const { channelFormSchema } = validationSchemas();
   const { t } = useTranslation();
@@ -63,15 +61,15 @@ const AddingPanel = ({
           aria-label="add channel"
           className="mb-2 form-control"
           data-testid="add-channel"
-          isInvalid={!formik.isValid}
+          isInvalid={!formik.isValid && !formik.isSubmitting}
           autoComplete="off"
+          disabled={formik.isSubmitting}
         />
         <Form.Control.Feedback type="invalid">
           {(formik.errors.name !== 'networkError') && formik.errors.name}
         </Form.Control.Feedback>
         <div className="d-flex justify-content-end">
           <Button
-            disabled={formik.isSubmitting}
             onClick={closeModal}
             type="button"
             variant="secondary"
@@ -85,29 +83,5 @@ const AddingPanel = ({
     </Form>
   );
 };
-
-/* const AddingPanel = ({ closeModal }) => {
-  const socket = useSocket();
-  const initialName = '';
-  const { t } = useTranslation();
-  const notify = (message) => toast(message);
-
-  const addChannel = ({ name }, { setErrors }) => {
-    const channel = { name };
-    try {
-      socket.addChannel(channel);
-      closeModal();
-      notify(t('channelCreated'));
-    } catch (error) {
-      setErrors({ name: error.message });
-    }
-  };
-
-  return (
-    <ChannelForm
-      closeModal={closeModal}
-    />
-  );
-}; */
 
 export default AddingPanel;
