@@ -5,7 +5,6 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useFormik } from 'formik';
 import { Button, Form } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
 
 import useAuth from '../hooks/useAuth.js';
 import routes from '../routes.js';
@@ -35,7 +34,7 @@ const LoginForm = () => {
         auth.logIn(token, username);
         history.replace('/');
       } catch (error) {
-        if (!error.isAxiosError || error.response.status !== 401) {
+        if (!error.isAxiosError || !error.response || error.response.status !== 401) {
           throw new Error(error);
         }
         setIsAuthFailed(true);

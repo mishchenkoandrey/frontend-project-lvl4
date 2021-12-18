@@ -2,31 +2,36 @@
 
 import React from 'react';
 import _ from 'lodash';
+import { useTranslation } from 'react-i18next';
+import { toast } from 'react-toastify';
 
 import socketContext from '../context/socketContext.js';
 
-const socketWrapper = (socket, action, data) => {
-  if (socket.disconnected) {
-    throw new Error('networkError');
-  }
-  socket.emit(action, data, _.noop);
-};
-
 const SocketProvider = ({ socket, children }) => {
+  const { t } = useTranslation();
+  const socketWrapper = (action, data) => {
+    const notify = (message) => toast(message);
+    if (socket.disconnected) {
+      notify(t('networkError'));
+      throw new Error('networkError');
+    }
+    socket.emit(action, data, _.noop);
+  };
+
   const sendMessage = (message) => {
-    socketWrapper(socket, 'newMessage', message);
+    socketWrapper('newMessage', message);
   };
 
   const addChannel = (channel) => {
-    socketWrapper(socket, 'newChannel', channel);
+    socketWrapper('newChannel', channel);
   };
 
   const removeChannel = (channel) => {
-    socketWrapper(socket, 'removeChannel', channel);
+    socketWrapper('removeChannel', channel);
   };
 
   const renameChannel = (channel) => {
-    socketWrapper(socket, 'renameChannel', channel);
+    socketWrapper('renameChannel', channel);
   };
 
   return (
