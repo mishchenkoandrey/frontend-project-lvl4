@@ -6,8 +6,8 @@ import { useFormik } from 'formik';
 import { Form, Button } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
-import useSocket from '../hooks/useSocket.js';
 
+import useSocket from '../hooks/useSocket.js';
 import validationSchemas from '../validation.js';
 
 const AddingPanel = ({
@@ -62,7 +62,6 @@ const AddingPanel = ({
           className="mb-2 form-control"
           data-testid="add-channel"
           isInvalid={!formik.isValid && formik.errors.name !== 'networkError'}
-          autoComplete="off"
           disabled={formik.isSubmitting}
         />
         <Form.Control.Feedback type="invalid">
