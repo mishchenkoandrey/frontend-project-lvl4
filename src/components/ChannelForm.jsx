@@ -30,7 +30,7 @@ const ChannelForm = ({
   useEffect(() => {
     inputRef.current.focus();
   }, [formik.isSubmitting]);
-  console.log(formik.errors.name);
+
   return (
     <Form onSubmit={formik.handleSubmit}>
       <Form.Group>
