@@ -2,12 +2,16 @@
 
 import React from 'react';
 
+const filter = require('leo-profanity');
+
+filter.add(filter.getDictionary('ru'));
+
 const Message = ({ message }) => {
   const { nickname, body } = message;
   return (
     <div className="text-break mb-2">
       <b>{nickname}</b>
-      {`: ${body}`}
+      {`: ${filter.clean(body)}`}
     </div>
   );
 };
