@@ -10,29 +10,27 @@ import { toast } from 'react-toastify';
 import useSocket from '../hooks/useSocket.js';
 import validationSchemas from '../validation.js';
 
-const RenamingPanel = ({
+const AddingChannelForm = ({
   closeModal,
 }) => {
   const socket = useSocket();
   const { channelFormSchema } = validationSchemas();
-  const channelId = useSelector((state) => state.modalWindowInfo.channelId);
-  const channels = useSelector((state) => state.channelsInfo.channels);
-  const currentChannel = channels.find(({ id }) => id === channelId);
   const { t } = useTranslation();
   const notify = (message) => toast(message);
   const inputRef = useRef();
+  const channels = useSelector((state) => state.channelsInfo.channels);
   const channelsNames = channels.map(({ name }) => name);
   const formik = useFormik({
     initialValues: {
-      name: currentChannel.name,
+      name: '',
     },
     validationSchema: channelFormSchema(channelsNames),
-    onSubmit: ((channel) => ({ name }, { setErrors }) => {
-      const changedСhannel = { ...channel, name };
+    onSubmit: ({ name }, { setErrors }) => {
+      const channel = { name };
       try {
-        socket.renameChannel(changedСhannel);
+        socket.addChannel(channel);
         closeModal();
-        notify(t('channelRenamed'));
+        notify(t('channelCreated'));
       } catch (error) {
         if (error.message === 'networkError') {
           setTimeout(() => {
@@ -41,7 +39,7 @@ const RenamingPanel = ({
         }
         setErrors({ name: error.message });
       }
-    })(currentChannel),
+    },
     validateOnChange: false,
   });
 
@@ -85,4 +83,4 @@ const RenamingPanel = ({
   );
 };
 
-export default RenamingPanel;
+export default AddingChannelForm;

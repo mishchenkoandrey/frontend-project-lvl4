@@ -6,14 +6,14 @@ import { Modal } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 
 import { closeModalWindow } from '../slices/modalWindowSlice.js';
-import AddingPanel from './AddingPanel.jsx';
-import RenamingPanel from './RenamingPanel.jsx';
-import RemovingPanel from './RemovingPanel.jsx';
+import AddingChannelForm from './AddingChannelForm.jsx';
+import RenamingChannelForm from './RenamingChannelForm.jsx';
+import RemovingChannelPanel from './RemovingChannelPanel.jsx';
 
 const ControlPanels = {
-  addChannel: AddingPanel,
-  removeChannel: RemovingPanel,
-  renameChannel: RenamingPanel,
+  addChannel: AddingChannelForm,
+  renameChannel: RenamingChannelForm,
+  removeChannel: RemovingChannelPanel,
 };
 
 const ModalWindow = () => {

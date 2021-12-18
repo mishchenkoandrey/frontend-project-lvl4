@@ -8,7 +8,7 @@ import { toast } from 'react-toastify';
 
 import useSocket from '../hooks/useSocket.js';
 
-const RemovingPanel = ({ closeModal }) => {
+const RemovingChannelPanel = ({ closeModal }) => {
   const { t } = useTranslation();
   const socket = useSocket();
   const channelId = useSelector((state) => state.modalWindowInfo.channelId);
@@ -37,4 +37,4 @@ const RemovingPanel = ({ closeModal }) => {
   );
 };
 
-export default RemovingPanel;
+export default RemovingChannelPanel;
