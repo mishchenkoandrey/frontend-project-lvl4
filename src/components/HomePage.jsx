@@ -4,6 +4,8 @@ import axios from 'axios';
 import React, { useEffect } from 'react';
 import { Container, Row } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
+import { useTranslation } from 'react-i18next';
+import { toast } from 'react-toastify';
 
 import routes from '../routes.js';
 import useAuth from '../hooks/useAuth.js';
@@ -15,6 +17,7 @@ import { initChannels } from '../slices/channelsSlice.js';
 const HomePage = () => {
   const dispatch = useDispatch();
   const auth = useAuth();
+  const notify = () => toast.error(t('networkError'));
   const fetchData = async () => {
     const token = auth.getToken();
     try {
@@ -27,6 +30,7 @@ const HomePage = () => {
       dispatch(initChannels({ data }));
     } catch (error) {
       if (!error.isAxiosError || error.response.status !== 401) {
+        notify();
         throw new Error(error);
       }
     }

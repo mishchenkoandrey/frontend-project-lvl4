@@ -6,6 +6,7 @@ import { useFormik } from 'formik';
 import { Button, Form } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { toast } from 'react-toastify';
 
 import useAuth from '../hooks/useAuth.js';
 import routes from '../routes.js';
@@ -21,6 +22,7 @@ const LoginForm = () => {
   useEffect(() => {
     inputRef.current.focus();
   }, []);
+  const notify = () => toast.error(t('networkError'));
 
   const formik = useFormik({
     initialValues: {
@@ -36,6 +38,7 @@ const LoginForm = () => {
         history.replace('/');
       } catch (error) {
         if (!error.isAxiosError || !error.response || error.response.status !== 401) {
+          notify();
           throw new Error(error);
         }
         setIsAuthFailed(true);

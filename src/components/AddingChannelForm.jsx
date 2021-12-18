@@ -16,7 +16,7 @@ const AddingChannelForm = ({
   const socket = useSocket();
   const { channelFormSchema } = validationSchemas();
   const { t } = useTranslation();
-  const notify = (message) => toast(message);
+  const notify = () => toast.success(t('channelCreated'));
   const inputRef = useRef();
   const channels = useSelector((state) => state.channelsInfo.channels);
   const channelsNames = channels.map(({ name }) => name);
@@ -30,7 +30,7 @@ const AddingChannelForm = ({
       try {
         socket.addChannel(channel);
         closeModal();
-        notify(t('channelCreated'));
+        notify();
       } catch (error) {
         if (error.message === 'networkError') {
           setTimeout(() => {
