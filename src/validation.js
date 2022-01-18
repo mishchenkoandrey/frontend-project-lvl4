@@ -34,7 +34,7 @@ export default () => {
         .min(passwordMinCharsCount, t('atLeastChars', { min: passwordMinCharsCount })),
       confirmPassword: yup
         .string()
-        .required()
+        .required(t('requiredField'))
         .oneOf([yup.ref('password'), null], t('passwordsMustMatch')),
     }),
   };

@@ -67,9 +67,11 @@ const LoginForm = () => {
           disabled={formik.isSubmitting}
         />
         <Form.Label htmlFor="username">{t('yourNick')}</Form.Label>
-        {formik.touched.username && formik.errors.username ? (
-          <Form.Control.Feedback type="invalid">{formik.errors.username}</Form.Control.Feedback>
-        ) : null}
+        {!isAuthFailed && formik.touched.username && formik.errors.username && (
+          <Form.Control.Feedback type="invalid">
+            {formik.errors.username}
+          </Form.Control.Feedback>
+        )}
       </Form.Group>
       <Form.Group className="form-floating mb-4">
         <Form.Control
@@ -88,10 +90,17 @@ const LoginForm = () => {
           disabled={formik.isSubmitting}
         />
         <Form.Label htmlFor="password">{t('password')}</Form.Label>
-        {formik.touched.password && formik.errors.password ? (
-          <Form.Control.Feedback type="invalid">{formik.errors.password}</Form.Control.Feedback>
-        ) : null}
-        <Form.Control.Feedback type="invalid">{t('invalidUsernameOrPassword')}</Form.Control.Feedback>
+        {!isAuthFailed && formik.touched.password && formik.errors.password && (
+          <Form.Control.Feedback type="invalid">
+            {formik.errors.password}
+          </Form.Control.Feedback>
+        )}
+        {isAuthFailed
+          && (
+          <Form.Control.Feedback type="invalid">
+            {t('invalidUsernameOrPassword')}
+          </Form.Control.Feedback>
+          )}
       </Form.Group>
       <Button type="submit" variant="outline-primary" className="w-100 mb-3" disabled={formik.isSubmitting}>{t('login')}</Button>
     </Form>
