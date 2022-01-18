@@ -5,8 +5,6 @@ import { Provider } from 'react-redux';
 import i18n from 'i18next';
 import { initReactI18next, I18nextProvider } from 'react-i18next';
 import { Provider as RollbarProvider, ErrorBoundary } from '@rollbar/react';
-import ReactDOM from 'react-dom';
-import { io } from 'socket.io-client';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -22,7 +20,7 @@ import App from './components/App.jsx';
 import AuthProvider from './components/AuthProvider.jsx';
 import ru from './locales/ru.js';
 
-const init = async (socket) => {
+export default async (socket) => {
   const rollbarConfig = {
     enabled: process.env.NODE_ENV === 'production',
     accessToken: process.env.ROLLBAR_TOKEN,
@@ -84,18 +82,4 @@ const init = async (socket) => {
       </ErrorBoundary>
     </RollbarProvider>
   );
-};
-
-export default async () => {
-  const mode = process.env.NODE_ENV;
-
-  if (mode !== 'production') {
-    localStorage.debug = 'chat:*';
-  }
-
-  const socket = io();
-  const vdom = await init(socket);
-  const container = document.querySelector('#chat');
-
-  ReactDOM.render(vdom, container);
 };
