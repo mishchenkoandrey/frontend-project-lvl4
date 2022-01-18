@@ -15,6 +15,7 @@ module.exports = {
     path: path.join(__dirname, 'dist', 'public'),
     publicPath: '/assets/',
   },
+  devtool: mode === 'production' ? false : 'source-map',
   devServer: {
     compress: true,
     port: 8080,
