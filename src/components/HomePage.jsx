@@ -19,14 +19,17 @@ const HomePage = () => {
   const auth = useAuth();
   const { t } = useTranslation();
   const notify = () => toast.error(t('networkError'));
+
   const fetchData = async () => {
     const token = auth.getToken();
+
     try {
       const response = await axios.get(routes.data(), {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
+
       const { data } = response;
       dispatch(initChannels({ data }));
     } catch (error) {

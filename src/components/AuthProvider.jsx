@@ -8,11 +8,13 @@ const AuthProvider = ({ children }) => {
   const getToken = () => localStorage.getItem('token');
   const getUsername = () => localStorage.getItem('username');
   const isLoggedIn = () => _.has(localStorage, 'token');
+
   const logIn = (token, username) => {
     localStorage.setItem('token', token);
     localStorage.setItem('username', username);
     setUser({ username, token });
   };
+
   const logOut = () => {
     localStorage.removeItem('username');
     localStorage.removeItem('token');

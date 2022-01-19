@@ -11,6 +11,7 @@ import LoginForm from './LoginForm.jsx';
 
 const LoginPage = () => {
   const { t } = useTranslation();
+
   return (
     <Container fluid className="h-100">
       <Row className="justify-content-center align-content-center h-100">

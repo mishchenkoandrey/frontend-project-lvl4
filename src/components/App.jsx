@@ -17,6 +17,7 @@ import useAuth from '../hooks/useAuth.js';
 
 export default () => {
   const auth = useAuth();
+
   return (
     <div className="d-flex flex-column h-100">
       <Header />
