@@ -138,7 +138,7 @@ const SignupForm = () => {
           )}
         </FloatingLabel>
       </Form.Group>
-      <Button type="submit" variant="outline-primary" className="w-100" disabled={formik.isSubmitting || !formik.isValid}>{t('signup')}</Button>
+      <Button type="submit" variant="outline-primary" className="w-100" disabled={formik.isSubmitting}>{t('signup')}</Button>
     </Form>
   );
 };
