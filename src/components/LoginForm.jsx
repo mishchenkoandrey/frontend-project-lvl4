@@ -63,7 +63,6 @@ const LoginForm = () => {
             || (formik.touched.username && !!formik.errors.username)}
           required
           ref={inputRef}
-          className="form-control"
           disabled={formik.isSubmitting}
         />
         <Form.Label htmlFor="username">{t('yourNick')}</Form.Label>
@@ -86,7 +85,6 @@ const LoginForm = () => {
           isInvalid={isAuthFailed
             || (formik.touched.password && !!formik.errors.password)}
           required
-          className="form-control"
           disabled={formik.isSubmitting}
         />
         <Form.Label htmlFor="password">{t('password')}</Form.Label>
