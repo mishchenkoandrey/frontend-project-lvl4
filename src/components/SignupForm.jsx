@@ -100,11 +100,11 @@ const SignupForm = () => {
               (formik.errors.password && formik.touched.password) || !isValidData
             }
           />
-          {formik.touched.password && formik.errors.password ? (
+          {formik.touched.password && formik.errors.password && (
             <Form.Control.Feedback type="invalid">
               {t(formik.errors.password)}
             </Form.Control.Feedback>
-          ) : null}
+          )}
         </FloatingLabel>
       </Form.Group>
       <Form.Group>
