@@ -21,6 +21,7 @@ export default {
     },
     mustBeUnique: 'Должно быть уникальным',
     networkError: 'Ошибка cети',
+    newMessage: 'Новое сообщение',
     noAccount: 'Нет аккаунта?',
     password: 'Пароль',
     passwordsMustMatch: 'Пароли должны совпадать',

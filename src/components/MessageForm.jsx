@@ -63,6 +63,7 @@ const MessageForm = () => {
           value={formik.values.body}
           name="body"
           ref={inputRef}
+          aria-label={t('newMessage')}
           data-testid="new-message"
           placeholder={t('enterMessage')}
           className="border-0 p-0 ps-2"
