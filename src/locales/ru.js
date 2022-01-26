@@ -1,6 +1,5 @@
 export default {
   translation: {
-    add: 'Добавить',
     addChannel: 'Добавить канал',
     atLeastChars: 'Не менее {{min}} символов',
     cancel: 'Отменить',
@@ -25,6 +24,7 @@ export default {
     noAccount: 'Нет аккаунта?',
     password: 'Пароль',
     passwordsMustMatch: 'Пароли должны совпадать',
+    plus: '+',
     remove: 'Удалить',
     removeChannel: 'Удалить канал',
     rename: 'Переименовать',
