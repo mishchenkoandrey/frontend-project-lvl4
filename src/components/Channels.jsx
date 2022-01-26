@@ -36,7 +36,6 @@ const Channels = () => {
       <div className="d-flex justify-content-between mb-2 ps-4 pe-2">
         <span>{t('channels')}</span>
         <Button
-          name="+"
           onClick={addChannel}
           variant="link"
           className="p-0 text-primary btn-group-vertical"
