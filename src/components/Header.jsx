@@ -17,7 +17,7 @@ const Header = () => {
     <header className="shadow-sm" expand="lg" bg="white">
       <Navbar>
         <Container>
-          <Navbar.Brand as={Link} href="/">{t('hexletChat')}</Navbar.Brand>
+          <Navbar.Brand as={Link} to="/">{t('hexletChat')}</Navbar.Brand>
           {auth.isLoggedIn() && (
             <Button onClick={handleLogOut}>{t('signout')}</Button>
           )}
