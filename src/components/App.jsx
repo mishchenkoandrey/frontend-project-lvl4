@@ -20,8 +20,8 @@ export default () => {
 
   return (
     <div className="d-flex flex-column h-100">
-      <Header />
       <Router>
+        <Header />
         <Switch>
           <Route exact path="/">
             {({ location }) => (auth.isLoggedIn()

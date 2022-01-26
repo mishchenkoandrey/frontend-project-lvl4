@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { Container, Navbar, Button } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
 import useAuth from '../hooks/useAuth.js';
@@ -16,7 +17,7 @@ const Header = () => {
     <header className="shadow-sm" expand="lg" bg="white">
       <Navbar>
         <Container>
-          <Navbar.Brand as="a" href="/">{t('hexletChat')}</Navbar.Brand>
+          <Navbar.Brand as={Link} href="/">{t('hexletChat')}</Navbar.Brand>
           {auth.isLoggedIn() && (
             <Button onClick={handleLogOut}>{t('signout')}</Button>
           )}
