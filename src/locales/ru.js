@@ -4,6 +4,7 @@ export default {
     atLeastChars: 'Не менее {{min}} символов',
     cancel: 'Отменить',
     channelCreated: 'Канал создан',
+    channelName: 'Имя канала',
     channelRemoved: 'Канал удалён',
     channelRenamed: 'Канал переименован',
     channels: 'Каналы',

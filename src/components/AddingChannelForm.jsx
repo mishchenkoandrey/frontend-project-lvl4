@@ -64,6 +64,7 @@ const AddingChannelForm = ({
           isInvalid={!formik.isValid && formik.errors.name !== 'networkError'}
           disabled={formik.isSubmitting}
         />
+        <Form.Label htmlFor="name" className="visually-hidden">{t('channelName')}</Form.Label>
         <Form.Control.Feedback type="invalid">
           {(formik.errors.name !== 'networkError') && formik.errors.name}
         </Form.Control.Feedback>
