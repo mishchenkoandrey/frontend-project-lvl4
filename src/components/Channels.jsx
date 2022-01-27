@@ -16,9 +16,9 @@ const Channels = () => {
   const currentChannelId = useSelector((state) => state.channelsInfo.currentChannelId);
   const dispatch = useDispatch();
   const handleActiveChannel = (channelId) => () => dispatch(setCurrentChannelId({ channelId }));
-  const sendMessageButton = document.querySelector('input[data-testid="new-message"] ~ button');
+  const modalContent = document.querySelector('body > *');
   const addChannel = () => {
-    sendMessageButton.ariaHidden = 'true';
+    modalContent.ariaHidden = 'true';
     dispatch(openModalWindow({ name: 'addChannel' }));
   };
 

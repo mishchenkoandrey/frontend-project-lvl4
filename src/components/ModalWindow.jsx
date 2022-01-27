@@ -20,10 +20,10 @@ const ModalWindow = () => {
   const { t } = useTranslation();
   const { isVisible, name } = useSelector((state) => state.modalWindowInfo);
   const dispatch = useDispatch();
-  const sendMessageButton = document.querySelector('input[data-testid="new-message"] ~ button');
+  const modalContent = document.querySelector('body > *');
 
   const closeModal = () => {
-    sendMessageButton.removeAttribute('aria-hidden');
+    modalContent.removeAttribute('aria-hidden');
     dispatch(closeModalWindow());
   };
 
