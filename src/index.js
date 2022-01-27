@@ -17,8 +17,7 @@ const runApp = async () => {
   const socket = io();
   const vdom = await init(socket);
   const container = document.querySelector('#chat');
-  const modalContent = document.querySelector('body > *');
-  modalContent.ariaHidden = 'false';
+
   ReactDOM.render(vdom, container);
 };
 

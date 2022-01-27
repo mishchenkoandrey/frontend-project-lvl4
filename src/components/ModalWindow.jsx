@@ -20,10 +20,8 @@ const ModalWindow = () => {
   const { t } = useTranslation();
   const { isVisible, name } = useSelector((state) => state.modalWindowInfo);
   const dispatch = useDispatch();
-  const modalContent = document.querySelector('body > *');
 
   const closeModal = () => {
-    modalContent.ariaHidden = 'false';
     dispatch(closeModalWindow());
   };
 

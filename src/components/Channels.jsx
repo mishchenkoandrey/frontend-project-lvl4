@@ -16,9 +16,7 @@ const Channels = () => {
   const currentChannelId = useSelector((state) => state.channelsInfo.currentChannelId);
   const dispatch = useDispatch();
   const handleActiveChannel = (channelId) => () => dispatch(setCurrentChannelId({ channelId }));
-  const modalContent = document.querySelector('body > *');
   const addChannel = () => {
-    modalContent.ariaHidden = 'true';
     dispatch(openModalWindow({ name: 'addChannel' }));
   };
 
