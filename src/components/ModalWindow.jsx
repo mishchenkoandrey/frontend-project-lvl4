@@ -23,7 +23,7 @@ const ModalWindow = () => {
   const modalContent = document.querySelector('body > *');
 
   const closeModal = () => {
-    modalContent.removeAttribute('aria-hidden');
+    modalContent.ariaHidden = 'false';
     dispatch(closeModalWindow());
   };
 
