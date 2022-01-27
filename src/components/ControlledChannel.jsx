@@ -25,7 +25,9 @@ const ControlledChannel = ({
           <span className="me-1">#</span>
           {name}
         </Button>
-        <Dropdown.Toggle split variant={btnVariant} className="flex-grow-0" />
+        <Dropdown.Toggle split variant={btnVariant} className="flex-grow-0">
+          <span className="visually-hidden">{t('channelControl')}</span>
+        </Dropdown.Toggle>
         <Dropdown.Menu>
           <Dropdown.Item onClick={removeChannel}>{t('remove')}</Dropdown.Item>
           <Dropdown.Item onClick={renameChannel}>{t('rename')}</Dropdown.Item>

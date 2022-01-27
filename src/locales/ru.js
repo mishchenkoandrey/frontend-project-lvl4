@@ -3,6 +3,7 @@ export default {
     addChannel: 'Добавить канал',
     atLeastChars: 'Не менее {{min}} символов',
     cancel: 'Отменить',
+    channelControl: 'Управление каналом',
     channelCreated: 'Канал создан',
     channelName: 'Имя канала',
     channelRemoved: 'Канал удалён',
