@@ -23,8 +23,8 @@ const ModalWindow = () => {
   const sendMessageButton = document.querySelector('input[data-testid="new-message"] ~ button');
 
   const closeModal = () => {
-    dispatch(closeModalWindow());
     sendMessageButton.removeAttribute('aria-hidden');
+    dispatch(closeModalWindow());
   };
 
   const ControlPanel = ControlPanels[name];
