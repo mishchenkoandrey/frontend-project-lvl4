@@ -21,7 +21,7 @@ export default {
       count_many: '{{count}} сообщений',
     },
     mustBeUnique: 'Должно быть уникальным',
-    networkError: 'Ошибка cети',
+    networkError: 'Ошибка cоединения',
     newMessage: 'Новое сообщение',
     noAccount: 'Нет аккаунта?',
     password: 'Пароль',
