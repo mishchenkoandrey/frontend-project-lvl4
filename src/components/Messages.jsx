@@ -16,6 +16,7 @@ const Messages = () => {
   const findCurrentChannel = (state) => _.find(state.channelsInfo.channels, ['id', currentChannelId]);
   const currentChannel = useSelector(findCurrentChannel);
   const messages = useSelector((state) => state.messages);
+  const modalIsVisible = useSelector((state) => state.modalWindowInfo.isVisible);
   const currentChannelMessages = messages.filter(
     ({ channelId }) => channelId === currentChannelId,
   );
@@ -32,7 +33,7 @@ const Messages = () => {
   }, [currentChannelId, messages]);
 
   return (
-    <Col className="p-0 h-100" as="main">
+    <Col className="p-0 h-100" as="main" aria-hidden={modalIsVisible}>
       <div className="d-flex flex-column h-100">
         <header className="bg-light mb-4 p-3 shadow-sm small">
           <p className="m-0">
