@@ -33,10 +33,16 @@ const HomePage = () => {
       const { data } = response;
       dispatch(initChannels({ data }));
     } catch (error) {
-      if (!error.isAxiosError || error.response.status !== 401) {
-        notify();
-        throw new Error(error);
+      if (error.isAxiosError && error.response.status === 401) {
+        auth.logOut();
+        return;
       }
+      if (error.isAxiosError && error.response.status === 500) {
+        toast(t('errors.networkError'));
+        console.error(error.response.statusText);
+      }
+      toast(t('errors.unknownError'));
+      console.error(error.response.statusText);
     }
   };
 
