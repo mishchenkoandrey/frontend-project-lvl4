@@ -39,11 +39,9 @@ const HomePage = () => {
       }
       if (error.isAxiosError && error.response.status === 500) {
         notify('networkError');
-        console.error(error.response.statusText);
         return;
       }
       notify('unknownError');
-      console.error(error.response.statusText);
     }
   };
 
