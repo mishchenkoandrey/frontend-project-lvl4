@@ -18,7 +18,7 @@ const HomePage = () => {
   const dispatch = useDispatch();
   const auth = useAuth();
   const { t } = useTranslation();
-  const notify = () => toast.error(t('networkError'));
+  const notify = (error) => toast.error(t(error));
 
   const fetchData = async () => {
     const token = auth.getToken();
@@ -38,10 +38,10 @@ const HomePage = () => {
         return;
       }
       if (error.isAxiosError && error.response.status === 500) {
-        toast(t('errors.networkError'));
+        notify('networkError');
         console.error(error.response.statusText);
       }
-      toast(t('errors.unknownError'));
+      notify('unknownError');
       console.error(error.response.statusText);
     }
   };
