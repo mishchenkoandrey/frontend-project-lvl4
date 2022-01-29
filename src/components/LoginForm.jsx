@@ -37,9 +37,6 @@ const LoginForm = () => {
         auth.logIn(token, username);
         history.replace('/');
       } catch (error) {
-        if (!error.isAxiosError || !error.response || error.response.status !== 401) {
-          throw new Error(error);
-        }
         notify();
         setIsAuthFailed(true);
         inputRef.current.select();
