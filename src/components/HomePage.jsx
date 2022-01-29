@@ -55,33 +55,21 @@ const HomePage = () => {
 
   return (
     <>
-      {isLoading ? (
-        <Container className="h-100">
-          <Row className="justify-content-center align-content-center h-100">
+      <Container className="h-100 my-4 overflow-hidden rounded shadow">
+        <Row className="justify-content-center align-content-center h-100 bg-white">
+          {isLoading ? (
             <Spinner animation="border" role="status">
               <span className="visually-hidden">{t('loading')}</span>
             </Spinner>
-          </Row>
-        </Container>
-      ) : (
-        <>
-          <Container className="h-100 my-4 overflow-hidden rounded shadow">
-            <Row className="justify-content-center align-content-center h-100 bg-white">
-              {isLoading ? (
-                <Spinner animation="border" role="status">
-                  <span className="visually-hidden">{t('loading')}</span>
-                </Spinner>
-              ) : (
-                <>
-                  <Channels />
-                  <Messages />
-                </>
-              )}
-            </Row>
-          </Container>
-          <ModalWindow />
-        </>
-      )}
+          ) : (
+            <>
+              <Channels />
+              <Messages />
+            </>
+          )}
+        </Row>
+      </Container>
+      <ModalWindow />
     </>
   );
 };
