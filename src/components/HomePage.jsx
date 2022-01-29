@@ -1,8 +1,8 @@
 // @ts-check
 
 import axios from 'axios';
-import React, { useEffect } from 'react';
-import { Container, Row } from 'react-bootstrap';
+import React, { useEffect, useState } from 'react';
+import { Container, Row, Spinner } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
@@ -18,6 +18,7 @@ const HomePage = () => {
   const dispatch = useDispatch();
   const auth = useAuth();
   const { t } = useTranslation();
+  const [isLoading, setLoading] = useState(true);
 
   const fetchData = async () => {
     const token = auth.getToken();
@@ -31,6 +32,7 @@ const HomePage = () => {
 
       const { data } = response;
       dispatch(initChannels({ data }));
+      setLoading(false);
     } catch (error) {
       if (error.isAxiosError && error.response.status === 401) {
         auth.logOut();
@@ -53,13 +55,33 @@ const HomePage = () => {
 
   return (
     <>
-      <Container className="h-100 my-4 overflow-hidden rounded shadow">
-        <Row className="h-100 bg-white">
-          <Channels />
-          <Messages />
-        </Row>
-      </Container>
-      <ModalWindow />
+      {isLoading ? (
+        <Container className="h-100">
+          <Row className="justify-content-center align-content-center h-100">
+            <Spinner animation="border" role="status">
+              <span className="visually-hidden">{t('loading')}</span>
+            </Spinner>
+          </Row>
+        </Container>
+      ) : (
+        <>
+          <Container className="h-100 my-4 overflow-hidden rounded shadow">
+            <Row className="justify-content-center align-content-center h-100 bg-white">
+              {isLoading ? (
+                <Spinner animation="border" role="status">
+                  <span className="visually-hidden">{t('loading')}</span>
+                </Spinner>
+              ) : (
+                <>
+                  <Channels />
+                  <Messages />
+                </>
+              )}
+            </Row>
+          </Container>
+          <ModalWindow />
+        </>
+      )}
     </>
   );
 };

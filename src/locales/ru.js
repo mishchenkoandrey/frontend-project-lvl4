@@ -14,6 +14,7 @@ export default {
     fromToChars: 'От {{min}} до {{max}} символов',
     hexletChat: 'Hexlet Chat',
     invalidUsernameOrPassword: 'Неверные имя пользователя или пароль',
+    loading: 'Загрузка...',
     login: 'Войти',
     messages: {
       count_one: '{{count}} сообщение',
