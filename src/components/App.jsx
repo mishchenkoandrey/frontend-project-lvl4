@@ -24,7 +24,12 @@ export default () => {
         <Header />
         <Switch>
           <Route exact path="/">
-            <HomePage />
+            {({ location }) => (auth.isLoggedIn()
+              ? (
+                <HomePage />
+              ) : (
+                <Redirect to={{ pathname: '/login', state: { from: location } }} />
+              ))}
           </Route>
           <Route path="/login">
             <LoginPage />

@@ -36,11 +36,11 @@ const HomePage = () => {
       dispatch(initChannels({ data }));
     } catch (error) {
       history.replace('/login');
+      notify();
+
       if (!error.isAxiosError || error.response.status !== 401) {
         throw new Error(error);
       }
-
-      notify();
     }
   };
 
