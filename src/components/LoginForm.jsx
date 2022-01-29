@@ -38,9 +38,9 @@ const LoginForm = () => {
         history.replace('/');
       } catch (error) {
         if (!error.isAxiosError || !error.response || error.response.status !== 401) {
-          notify();
           throw new Error(error);
         }
+        notify();
         setIsAuthFailed(true);
         inputRef.current.select();
       }
