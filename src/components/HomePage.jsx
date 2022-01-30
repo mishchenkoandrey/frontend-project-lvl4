@@ -1,9 +1,7 @@
 // @ts-check
 
 import axios from 'axios';
-import React, {
-  useCallback, useEffect, useRef, useState,
-} from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Container, Row, Spinner } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
@@ -20,10 +18,10 @@ const HomePage = () => {
   const dispatch = useDispatch();
   const auth = useAuth();
   const { t } = useTranslation();
-  const [isLoading, setIsLoading] = useState(true);
-  const isMounted = useRef(null);
+  const [isLoading, setLoading] = useState(true);
+  const isMountedRef = useRef(null);
 
-  const fetchData = useCallback(async () => {
+  const fetchData = async () => {
     const token = auth.getToken();
 
     try {
@@ -35,21 +33,32 @@ const HomePage = () => {
 
       const { data } = response;
       dispatch(initChannels({ data }));
-
-      if (isMounted.current) {
-        setIsLoading(false);
+      setLoading(false);
+    } catch (error) {
+      if (error.isAxiosError && error.response.status === 401) {
+        auth.logOut();
+        return;
       }
-    } catch {
-      toast(t('networkError'));
+
+      if (error.isAxiosError && error.response.status === 500) {
+        toast(t('networkError'));
+        console.error(error.response.statusText);
+      }
+
+      toast(t('unknownError'));
+      console.error(error.response.statusText);
     }
-  }, []);
+  };
 
   useEffect(() => {
-    isMounted.current = true;
-    fetchData();
+    isMountedRef.current = true;
+
+    if (isMountedRef.current) {
+      fetchData();
+    }
 
     return () => {
-      isMounted.current = false;
+      isMountedRef.current = false;
     };
   }, [fetchData]);
 
