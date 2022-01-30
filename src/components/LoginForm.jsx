@@ -38,10 +38,9 @@ const LoginForm = () => {
         if (error.isAxiosError && error.response.status === 401) {
           setIsAuthFailed(true);
           inputRef.current.select();
-          return;
+        } else {
+          throw error;
         }
-
-        throw error;
       }
     },
   });
