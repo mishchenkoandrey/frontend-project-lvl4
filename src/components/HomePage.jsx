@@ -57,7 +57,9 @@ const HomePage = () => {
       fetchData();
     }
 
-    return () => isMountedRef.current = false;
+    return () => {
+      isMountedRef.current = false;
+    };
   }, []);
 
   return (
