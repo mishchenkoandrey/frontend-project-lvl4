@@ -34,19 +34,8 @@ const HomePage = () => {
       const { data } = response;
       dispatch(initChannels({ data }));
       setLoading(false);
-    } catch (error) {
-      if (error.isAxiosError && error.response.status === 401) {
-        auth.logOut();
-        return;
-      }
-
-      if (error.isAxiosError && error.response.status === 500) {
-        toast(t('networkError'));
-        console.error(error.response.statusText);
-      }
-
-      toast(t('unknownError'));
-      console.error(error.response.statusText);
+    } catch {
+      toast(t('networkError'));
     }
   };
 
@@ -60,7 +49,7 @@ const HomePage = () => {
     return () => {
       isMountedRef.current = false;
     };
-  }, [fetchData]);
+  }, []);
 
   return (
     <>
