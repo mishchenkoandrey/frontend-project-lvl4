@@ -51,7 +51,7 @@ const HomePage = () => {
     return () => {
       isMounted.current = false;
     };
-  }, []);
+  }, [fetchData]);
 
   return (
     <>
