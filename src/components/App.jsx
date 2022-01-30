@@ -15,7 +15,7 @@ import PageNotFound from './PageNotFound.jsx';
 import Header from './Header.jsx';
 import useAuth from '../hooks/useAuth.js';
 
-export default () => {
+const App = () => {
   const auth = useAuth();
 
   return (
@@ -45,3 +45,5 @@ export default () => {
     </div>
   );
 };
+
+export default App;
