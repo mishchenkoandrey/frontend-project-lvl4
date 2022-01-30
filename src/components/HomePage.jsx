@@ -18,8 +18,8 @@ const HomePage = () => {
   const dispatch = useDispatch();
   const auth = useAuth();
   const { t } = useTranslation();
-  const [isLoading, setLoading] = useState(true);
-  const isMountedRef = useRef(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const isMounted = useRef(null);
 
   const fetchData = async () => {
     const token = auth.getToken();
@@ -34,8 +34,8 @@ const HomePage = () => {
       const { data } = response;
       dispatch(initChannels({ data }));
 
-      if (isMountedRef.current) {
-        setLoading(false);
+      if (isMounted.current) {
+        setIsLoading(false);
       }
     } catch (error) {
       if (error.isAxiosError && error.response.status === 401) {
@@ -54,11 +54,11 @@ const HomePage = () => {
   };
 
   useEffect(() => {
-    isMountedRef.current = true;
+    isMounted.current = true;
     fetchData();
 
     return () => {
-      isMountedRef.current = false;
+      isMounted.current = false;
     };
   }, []);
 
