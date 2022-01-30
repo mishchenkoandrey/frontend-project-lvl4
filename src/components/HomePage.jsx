@@ -14,50 +14,42 @@ import Messages from './Messages.jsx';
 import ModalWindow from './ModalWindow.jsx';
 import { initChannels } from '../slices/channelsSlice.js';
 
-const useIsMounted = () => {
-  const isMounted = useRef(null);
-
-  useEffect(() => {
-    isMounted.current = true;
-
-    return () => {
-      isMounted.current = false;
-    };
-  });
-
-  return isMounted;
-};
-
 const HomePage = () => {
   const dispatch = useDispatch();
   const auth = useAuth();
   const { t } = useTranslation();
   const [isLoading, setIsLoading] = useState(true);
-  const isMounted = useIsMounted();
-
-  const fetchData = async () => {
-    const token = auth.getToken();
-
-    try {
-      const response = await axios.get(routes.data(), {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-
-      const { data } = response;
-      dispatch(initChannels({ data }));
-
-      if (isMounted.current) {
-        setIsLoading(false);
-      }
-    } catch {
-      toast(t('networkError'));
-    }
-  };
+  const isMounted = useRef(null);
 
   useEffect(() => {
+    isMounted.current = true;
+
+    const fetchData = async () => {
+      const token = auth.getToken();
+
+      try {
+        const response = await axios.get(routes.data(), {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        const { data } = response;
+        dispatch(initChannels({ data }));
+
+        if (isMounted.current) {
+          setIsLoading(false);
+        }
+      } catch {
+        toast(t('networkError'));
+      }
+    };
+
     fetchData();
+
+    return () => {
+      isMounted.current = false;
+    };
   }, []);
 
   return (
