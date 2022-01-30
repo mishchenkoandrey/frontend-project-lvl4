@@ -39,11 +39,12 @@ const SignupForm = () => {
         auth.logIn(token, username);
         history.replace('/');
       } catch (error) {
-        if (!error.isAxiosError || error.response.status !== 409) {
-          throw new Error(error);
+        if (error.isAxiosError && error.response.status === 409) {
+          inputRef.current.select();
+          setIsValidData(false);
+        } else {
+          throw error;
         }
-        inputRef.current.select();
-        setIsValidData(false);
       }
     },
   });
