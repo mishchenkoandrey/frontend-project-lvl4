@@ -1,7 +1,9 @@
 // @ts-check
 
 import axios from 'axios';
-import React, { useEffect, useRef, useState } from 'react';
+import React, {
+  useCallback, useEffect, useRef, useState,
+} from 'react';
 import { Container, Row, Spinner } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
@@ -21,7 +23,7 @@ const HomePage = () => {
   const [isLoading, setIsLoading] = useState(true);
   const isMounted = useRef(null);
 
-  const fetchData = async () => {
+  const fetchData = useCallback(async () => {
     const token = auth.getToken();
 
     try {
@@ -40,7 +42,7 @@ const HomePage = () => {
     } catch {
       toast(t('networkError'));
     }
-  };
+  }, []);
 
   useEffect((processData = fetchData) => {
     isMounted.current = true;
