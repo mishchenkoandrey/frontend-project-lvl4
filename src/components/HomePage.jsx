@@ -21,15 +21,6 @@ const HomePage = () => {
   const [isLoading, setIsLoading] = useState(true);
   const isMounted = useRef(null);
 
-  useEffect(() => {
-    isMounted.current = true;
-    fetchData();
-
-    return () => {
-      isMounted.current = false;
-    };
-  }, []);
-
   const fetchData = async () => {
     const token = auth.getToken();
 
@@ -50,6 +41,15 @@ const HomePage = () => {
       toast(t('networkError'));
     }
   };
+
+  useEffect(() => {
+    isMounted.current = true;
+    fetchData();
+
+    return () => {
+      isMounted.current = false;
+    };
+  }, []);
 
   return (
     <>
