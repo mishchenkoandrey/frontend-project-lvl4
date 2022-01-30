@@ -21,31 +21,30 @@ const HomePage = () => {
   const [isLoading, setIsLoading] = useState(true);
   const isMounted = useRef(null);
 
-  useEffect(() => {
-    isMounted.current = true;
+  const fetchData = async () => {
+    const token = auth.getToken();
 
-    const fetchData = async () => {
-      const token = auth.getToken();
+    try {
+      const response = await axios.get(routes.data(), {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
-      try {
-        const response = await axios.get(routes.data(), {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
+      const { data } = response;
+      dispatch(initChannels({ data }));
 
-        const { data } = response;
-        dispatch(initChannels({ data }));
-
-        if (isMounted.current) {
-          setIsLoading(false);
-        }
-      } catch {
-        toast(t('networkError'));
+      if (isMounted.current) {
+        setIsLoading(false);
       }
-    };
+    } catch {
+      toast(t('networkError'));
+    }
+  };
 
-    fetchData();
+  useEffect((processData = fetchData) => {
+    isMounted.current = true;
+    processData();
 
     return () => {
       isMounted.current = false;
