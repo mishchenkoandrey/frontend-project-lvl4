@@ -18,8 +18,8 @@ const HomePage = () => {
   const dispatch = useDispatch();
   const auth = useAuth();
   const { t } = useTranslation();
-  const [isLoading, setLoading] = useState(true);
-  const isMountedRef = useRef(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const isMounted = useRef(null);
 
   const fetchData = async () => {
     const token = auth.getToken();
@@ -33,21 +33,21 @@ const HomePage = () => {
 
       const { data } = response;
       dispatch(initChannels({ data }));
-      setLoading(false);
+
+      if (isMounted.current) {
+        setIsLoading(false);
+      }
     } catch {
       toast(t('networkError'));
     }
   };
 
   useEffect(() => {
-    isMountedRef.current = true;
-
-    if (isMountedRef.current) {
-      fetchData();
-    }
+    isMounted.current = true;
+    fetchData();
 
     return () => {
-      isMountedRef.current = false;
+      isMounted.current = false;
     };
   }, []);
 
