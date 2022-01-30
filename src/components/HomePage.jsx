@@ -42,7 +42,7 @@ const HomePage = () => {
     } catch {
       toast(t('networkError'));
     }
-  }, []);
+  }, [auth, dispatch, t]);
 
   useEffect(() => {
     isMounted.current = true;
