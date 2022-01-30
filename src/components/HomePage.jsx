@@ -33,7 +33,10 @@ const HomePage = () => {
 
       const { data } = response;
       dispatch(initChannels({ data }));
-      setLoading(false);
+
+      if (isMountedRef.current) {
+        setLoading(false);
+      }
     } catch (error) {
       if (error.isAxiosError && error.response.status === 401) {
         auth.logOut();
@@ -52,10 +55,7 @@ const HomePage = () => {
 
   useEffect(() => {
     isMountedRef.current = true;
-
-    if (isMountedRef.current) {
-      fetchData();
-    }
+    fetchData();
 
     return () => {
       isMountedRef.current = false;
