@@ -1,7 +1,7 @@
 // @ts-check
 
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Container, Row, Spinner } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
@@ -19,6 +19,7 @@ const HomePage = () => {
   const auth = useAuth();
   const { t } = useTranslation();
   const [isLoading, setLoading] = useState(true);
+  const isMountedRef = useRef(null);
 
   const fetchData = async () => {
     const token = auth.getToken();
@@ -50,7 +51,13 @@ const HomePage = () => {
   };
 
   useEffect(() => {
-    fetchData();
+    isMountedRef.current = true;
+
+    if (isMountedRef.current) {
+      fetchData();
+    }
+
+    return () => isMountedRef.current = false;
   }, []);
 
   return (
