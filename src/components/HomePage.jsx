@@ -44,14 +44,14 @@ const HomePage = () => {
     }
   }, []);
 
-  useEffect((processData = fetchData) => {
+  useEffect(() => {
     isMounted.current = true;
-    processData();
+    fetchData();
 
     return () => {
       isMounted.current = false;
     };
-  }, []);
+  }, [fetchData]);
 
   return (
     <>
