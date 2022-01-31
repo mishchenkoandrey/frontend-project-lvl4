@@ -19,7 +19,6 @@ const RenamingChannelForm = ({
   const channels = useSelector((state) => state.channelsInfo.channels);
   const currentChannel = channels.find(({ id }) => id === channelId);
   const { t } = useTranslation();
-  const notify = () => toast.success(t('channelRenamed'));
   const inputRef = useRef();
   const channelsNames = channels.map(({ name }) => name);
   const formik = useFormik({
@@ -32,7 +31,7 @@ const RenamingChannelForm = ({
       try {
         socket.renameChannel(changedСhannel);
         closeModal();
-        notify();
+        toast.success(t('channelRenamed'));
       } catch (error) {
         if (error.message === 'networkError') {
           setTimeout(() => {

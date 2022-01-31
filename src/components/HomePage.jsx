@@ -40,7 +40,7 @@ const HomePage = () => {
         setIsLoading(false);
       }
     } catch {
-      toast(t('networkError'));
+      toast.error(t('networkError'));
     }
   }, [auth, dispatch, t]);
 
