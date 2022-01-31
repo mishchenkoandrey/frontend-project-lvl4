@@ -10,11 +10,11 @@ import socketContext from '../context/socketContext.js';
 const SocketProvider = ({ socket, children }) => {
   const { t } = useTranslation();
   const socketWrapper = (action, data) => {
+    const notify = () => toast.error(t('networkError'));
     if (socket.disconnected) {
-      toast.error(t('networkError'));
+      notify();
       throw new Error('networkError');
     }
-
     socket.emit(action, data, _.noop);
   };
 

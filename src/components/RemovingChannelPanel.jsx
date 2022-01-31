@@ -14,12 +14,13 @@ const RemovingChannelPanel = ({ closeModal }) => {
   const channelId = useSelector((state) => state.modalWindowInfo.channelId);
   const channels = useSelector((state) => state.channelsInfo.channels);
   const currentChannel = channels.find(({ id }) => id === channelId);
+  const notify = () => toast.success(t('channelRemoved'));
 
   const removeChannel = (channel) => ({ setErrors }) => {
     try {
       socket.removeChannel(channel);
       closeModal();
-      toast.success(t('channelRemoved'));
+      notify();
     } catch (error) {
       setErrors({ name: error.message });
     }
