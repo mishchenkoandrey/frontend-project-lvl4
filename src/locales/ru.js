@@ -39,7 +39,6 @@ export default {
     signup: 'Зарегистрироваться',
     suchUserAlreadyExists: 'Такой пользователь уже существует',
     sure: 'Уверены?',
-    unknownError: 'Неизвестная ошибка',
     username: 'Имя пользователя',
     yourNick: 'Ваш ник',
   },

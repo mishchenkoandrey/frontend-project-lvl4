@@ -39,9 +39,8 @@ const HomePage = () => {
       if (isMounted.current) {
         setIsLoading(false);
       }
-    } catch (error) {
+    } catch {
       toast.error(t('networkError'));
-      throw new Error(error);
     }
   }, [auth, dispatch, t]);
 
