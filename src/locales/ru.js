@@ -39,6 +39,7 @@ export default {
     signup: 'Зарегистрироваться',
     suchUserAlreadyExists: 'Такой пользователь уже существует',
     sure: 'Уверены?',
+    title: "Slack or whatever the hell it's called",
     username: 'Имя пользователя',
     yourNick: 'Ваш ник',
   },

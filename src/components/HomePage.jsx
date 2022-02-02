@@ -16,6 +16,7 @@ import Channels from './Channels.jsx';
 import Messages from './Messages.jsx';
 import ModalWindow from './ModalWindow.jsx';
 import { initChannels } from '../slices/channelsSlice.js';
+import setTitle from '../utils.jsx';
 
 const HomePage = () => {
   const dispatch = useDispatch();
@@ -24,6 +25,7 @@ const HomePage = () => {
   const history = useHistory();
   const [isLoading, setIsLoading] = useState(true);
   const isMounted = useRef(null);
+  setTitle();
 
   const fetchData = useCallback(async () => {
     const token = auth.getToken();

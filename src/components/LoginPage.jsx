@@ -8,9 +8,11 @@ import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
 import LoginForm from './LoginForm.jsx';
+import setTitle from '../utils.jsx';
 
 const LoginPage = () => {
   const { t } = useTranslation();
+  setTitle();
 
   return (
     <Container fluid className="h-100">
