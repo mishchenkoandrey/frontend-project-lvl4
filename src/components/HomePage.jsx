@@ -48,7 +48,7 @@ const HomePage = () => {
         toast.error(t('networkError'));
       }
     }
-  }, [auth, dispatch, t]);
+  }, [auth, dispatch, t, history]);
 
   useEffect(() => {
     isMounted.current = true;
