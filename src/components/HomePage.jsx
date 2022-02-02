@@ -7,6 +7,7 @@ import React, {
 import { Container, Row, Spinner } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
+import { useHistory } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 import routes from '../routes.js';
@@ -20,6 +21,7 @@ const HomePage = () => {
   const dispatch = useDispatch();
   const auth = useAuth();
   const { t } = useTranslation();
+  const history = useHistory();
   const [isLoading, setIsLoading] = useState(true);
   const isMounted = useRef(null);
 
@@ -39,8 +41,12 @@ const HomePage = () => {
       if (isMounted.current) {
         setIsLoading(false);
       }
-    } catch {
-      toast.error(t('networkError'));
+    } catch (error) {
+      if (error.response.status === 401) {
+        history.replace('/login');
+      } else {
+        toast.error(t('networkError'));
+      }
     }
   }, [auth, dispatch, t]);
 
