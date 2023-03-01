@@ -54,7 +54,7 @@ const SignupForm = () => {
   const usernameMaxCharsCount = _.find(validationParams.username.tests, ['name', 'max']).params.max;
   const passwordMinCharsCount = _.find(validationParams.password.tests, ['name', 'min']).params.min;
 
-  const renderFormikError = (error) => formik.touched.username && formik.errors[error] && (
+  const renderFormikError = (error) => formik.touched[error] && formik.errors[error] && (
     <Form.Control.Feedback type="invalid">
       {t(formik.errors.error)}
     </Form.Control.Feedback>
