@@ -54,12 +54,6 @@ const SignupForm = () => {
   const usernameMaxCharsCount = _.find(validationParams.username.tests, ['name', 'max']).params.max;
   const passwordMinCharsCount = _.find(validationParams.password.tests, ['name', 'min']).params.min;
 
-  const renderFormikError = (error) => formik.touched[error] && formik.errors[error] && (
-    <Form.Control.Feedback type="invalid">
-      {t(formik.errors.error)}
-    </Form.Control.Feedback>
-  );
-
   return (
     <Form onSubmit={formik.handleSubmit} className="p-3">
       <h1 className="text-center mb-4">Регистрация</h1>
@@ -82,7 +76,11 @@ const SignupForm = () => {
               (formik.errors.username && formik.touched.username) || !isValidData
             }
           />
-          {renderFormikError('username')}
+          {formik.touched.username && formik.errors.username && (
+            <Form.Control.Feedback type="invalid">
+              {t(formik.errors.username)}
+            </Form.Control.Feedback>
+          )}
         </FloatingLabel>
       </Form.Group>
       <Form.Group>
@@ -103,7 +101,11 @@ const SignupForm = () => {
               (formik.errors.password && formik.touched.password) || !isValidData
             }
           />
-          {renderFormikError('password')}
+          {formik.touched.password && formik.errors.password && (
+            <Form.Control.Feedback type="invalid">
+              {t(formik.errors.password)}
+            </Form.Control.Feedback>
+          )}
         </FloatingLabel>
       </Form.Group>
       <Form.Group>
@@ -125,7 +127,11 @@ const SignupForm = () => {
               || !isValidData
             }
           />
-          {renderFormikError('confirmPassword')}
+          {formik.touched.confirmPassword && formik.errors.confirmPassword && (
+            <Form.Control.Feedback type="invalid">
+              {t(formik.errors.confirmPassword)}
+            </Form.Control.Feedback>
+          )}
           {!isValidData && (
             <Form.Control.Feedback type="invalid">
               {t('suchUserAlreadyExists')}
