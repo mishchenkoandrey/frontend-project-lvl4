@@ -12,55 +12,55 @@ import useAuth from '../hooks/useAuth.js';
 import routes from '../routes.js';
 import validationSchemas from '../validation.js';
 
-const SignupForm = () => {
-  const { signupFormSchema } = validationSchemas();
-  const { t } = useTranslation();
-  const history = useHistory();
-  const [isValidData, setIsValidData] = useState(true);
-  const inputRef = useRef();
-  const auth = useAuth();
+const { signupFormSchema } = validationSchemas();
+const { t } = useTranslation();
+const history = useHistory();
+const [isValidData, setIsValidData] = useState(true);
+const inputRef = useRef();
+const auth = useAuth();
 
-  useEffect(() => {
-    inputRef.current.focus();
-  }, []);
+useEffect(() => {
+  inputRef.current.focus();
+}, []);
 
-  const formik = useFormik({
-    initialValues: {
-      username: '',
-      password: '',
-      confirmPassword: '',
-    },
-    validationSchema: signupFormSchema,
-    onSubmit: async ({ username, password }) => {
-      const credentials = { username, password };
-      try {
-        const response = await axios.post(routes.signupPath(), credentials);
-        const { token } = response.data;
-        auth.logIn(token, username);
-        history.replace('/');
-      } catch (error) {
-        if (error.isAxiosError && error.response.status === 409) {
-          inputRef.current.select();
-          setIsValidData(false);
-        } else {
-          throw error;
-        }
+const formik = useFormik({
+  initialValues: {
+    username: '',
+    password: '',
+    confirmPassword: '',
+  },
+  validationSchema: signupFormSchema,
+  onSubmit: async ({ username, password }) => {
+    const credentials = { username, password };
+    try {
+      const response = await axios.post(routes.signupPath(), credentials);
+      const { token } = response.data;
+      auth.logIn(token, username);
+      history.replace('/');
+    } catch (error) {
+      if (error.isAxiosError && error.response.status === 409) {
+        inputRef.current.select();
+        setIsValidData(false);
+      } else {
+        throw error;
       }
-    },
-  });
+    }
+  },
+});
 
-  const validationParams = signupFormSchema.describe().fields;
-  const usernameMinCharsCount = _.find(validationParams.username.tests, ['name', 'min']).params.min;
-  const usernameMaxCharsCount = _.find(validationParams.username.tests, ['name', 'max']).params.max;
-  const passwordMinCharsCount = _.find(validationParams.password.tests, ['name', 'min']).params.min;
+const validationParams = signupFormSchema.describe().fields;
+const usernameMinCharsCount = _.find(validationParams.username.tests, ['name', 'min']).params.min;
+const usernameMaxCharsCount = _.find(validationParams.username.tests, ['name', 'max']).params.max;
+const passwordMinCharsCount = _.find(validationParams.password.tests, ['name', 'min']).params.min;
 
-  const renderFormikError = (error) => formik.touched[error] && formik.errors[error] && (
-    <Form.Control.Feedback type="invalid">
-      {t(formik.errors[error])}
-    </Form.Control.Feedback>
-  );
+const renderFormikError = (error) => formik.touched[error] && formik.errors[error] && (
+  <Form.Control.Feedback type="invalid">
+    {t(formik.errors[error])}
+  </Form.Control.Feedback>
+);
 
-  return (
+const SignupForm = () => {
+  (
     <Form onSubmit={formik.handleSubmit} className="p-3">
       <h1 className="text-center mb-4">Регистрация</h1>
       <Form.Group>
