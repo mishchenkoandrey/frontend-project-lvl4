@@ -11,40 +11,39 @@ import useAuth from '../hooks/useAuth.js';
 import routes from '../routes.js';
 import validationSchemas from '../validation.js';
 
-const { loginFormSchema } = validationSchemas();
-const { t } = useTranslation();
-const auth = useAuth();
-const [isAuthFailed, setIsAuthFailed] = useState(false);
-const inputRef = useRef();
-const history = useHistory();
-
-const formik = useFormik({
-  initialValues: {
-    username: '',
-    password: '',
-  },
-  validationSchema: loginFormSchema,
-  onSubmit: async (loginData) => {
-    try {
-      const response = await axios.post(routes.loginPath(), loginData);
-      const { token, username } = response.data;
-      auth.logIn(token, username);
-      history.replace('/');
-    } catch (error) {
-      if (error.isAxiosError && error.response.status === 401) {
-        setIsAuthFailed(true);
-        inputRef.current.select();
-      } else {
-        throw error;
-      }
-    }
-  },
-});
-
 const LoginForm = () => {
+  const { loginFormSchema } = validationSchemas();
+  const { t } = useTranslation();
+  const auth = useAuth();
+  const [isAuthFailed, setIsAuthFailed] = useState(false);
+  const inputRef = useRef();
+  const history = useHistory();
   useEffect(() => {
     inputRef.current.focus();
   }, []);
+
+  const formik = useFormik({
+    initialValues: {
+      username: '',
+      password: '',
+    },
+    validationSchema: loginFormSchema,
+    onSubmit: async (loginData) => {
+      try {
+        const response = await axios.post(routes.loginPath(), loginData);
+        const { token, username } = response.data;
+        auth.logIn(token, username);
+        history.replace('/');
+      } catch (error) {
+        if (error.isAxiosError && error.response.status === 401) {
+          setIsAuthFailed(true);
+          inputRef.current.select();
+        } else {
+          throw error;
+        }
+      }
+    },
+  });
 
   return (
     <Form onSubmit={formik.handleSubmit} className="mt-3 mt-mb-0">
