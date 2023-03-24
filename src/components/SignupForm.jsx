@@ -12,13 +12,12 @@ import useAuth from '../hooks/useAuth.js';
 import routes from '../routes.js';
 import validationSchemas from '../validation.js';
 
-const { signupFormSchema } = validationSchemas();
-const validationParams = signupFormSchema.describe().fields;
-const usernameMinCharsCount = _.find(validationParams.username.tests, ['name', 'min']).params.min;
-const usernameMaxCharsCount = _.find(validationParams.username.tests, ['name', 'max']).params.max;
-const passwordMinCharsCount = _.find(validationParams.password.tests, ['name', 'min']).params.min;
-
 const SignupForm = () => {
+  const { signupFormSchema } = validationSchemas();
+  const validationParams = signupFormSchema.describe().fields;
+  const usernameMinCharsCount = _.find(validationParams.username.tests, ['name', 'min']).params.min;
+  const usernameMaxCharsCount = _.find(validationParams.username.tests, ['name', 'max']).params.max;
+  const passwordMinCharsCount = _.find(validationParams.password.tests, ['name', 'min']).params.min;
   const { t } = useTranslation();
   const history = useHistory();
   const [isValidData, setIsValidData] = useState(true);
